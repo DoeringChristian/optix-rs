@@ -1206,6 +1206,14 @@ pub enum OptixBuildInputType {
     #[doc = " Sphere inputs. \\see #OptixBuildInputSphereArray"]
     OPTIX_BUILD_INPUT_TYPE_SPHERES = 8518,
 }
+#[doc = " Build inputs.\n\n All of them support motion and the size of the data arrays needs to match the number of motion steps\n\n \\see #optixAccelComputeMemoryUsage(), #optixAccelBuild()"]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct OptixBuildInput {
+    #[doc = " The type of the build input."]
+    pub type_: OptixBuildInputType,
+    pub __bindgen_anon_1: OptixBuildInput__bindgen_ty_1,
+}
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub union OptixBuildInput__bindgen_ty_1 {
@@ -1298,6 +1306,40 @@ fn bindgen_test_layout_OptixBuildInput__bindgen_ty_1() {
     );
 }
 impl Default for OptixBuildInput__bindgen_ty_1 {
+    fn default() -> Self {
+        let mut s = ::std::mem::MaybeUninit::<Self>::uninit();
+        unsafe {
+            ::std::ptr::write_bytes(s.as_mut_ptr(), 0, 1);
+            s.assume_init()
+        }
+    }
+}
+#[test]
+fn bindgen_test_layout_OptixBuildInput() {
+    const UNINIT: ::std::mem::MaybeUninit<OptixBuildInput> = ::std::mem::MaybeUninit::uninit();
+    let ptr = UNINIT.as_ptr();
+    assert_eq!(
+        ::std::mem::size_of::<OptixBuildInput>(),
+        1032usize,
+        concat!("Size of: ", stringify!(OptixBuildInput))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<OptixBuildInput>(),
+        8usize,
+        concat!("Alignment of ", stringify!(OptixBuildInput))
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).type_) as usize - ptr as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(OptixBuildInput),
+            "::",
+            stringify!(type_)
+        )
+    );
+}
+impl Default for OptixBuildInput {
     fn default() -> Self {
         let mut s = ::std::mem::MaybeUninit::<Self>::uninit();
         unsafe {

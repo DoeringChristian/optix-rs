@@ -6,7 +6,6 @@ bindgen \
   --allowlist-type="RaygenRecord" \
   --allowlist-type="MissRecord" \
   --allowlist-type="HitgroupRecord" \
-  --blocklist-type="OptixBuildInput" \
   --allowlist-function="optix.*" \
   --allowlist-var="OptixSbtRecordHeaderSize" \
   --allowlist-var="OptixSbtRecordAlignment" \
