@@ -6,3 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+cuda-rs = { git = "https://github.com/DoeringChristian/cuda-rs.git" }
+glob = "0.3.1"
+libloading = "0.8.0"
+thiserror = "1.0.40"
