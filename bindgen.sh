@@ -17,6 +17,7 @@ bindgen \
   --allowlist-var="OptixVersion" \
   --allowlist-var="OptixBuildInputSize" \
   --allowlist-var="OptixShaderBindingTableSize" \
+  --blocklist-type="^CU.*" \
   --default-enum-style=rust \
   --with-derive-default \
   --with-derive-eq \
@@ -24,4 +25,4 @@ bindgen \
   --with-derive-ord \
   --dynamic-loading OptixApi\
   wrapper.h -- -I$OPTIX_ROOT_DIR/include -I/opt/cuda/include\
-  > src/optix.rs
+  > src/optix_bidngen.rs
