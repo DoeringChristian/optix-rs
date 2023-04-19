@@ -6,7 +6,7 @@ bindgen \
   --allowlist-type="RaygenRecord" \
   --allowlist-type="MissRecord" \
   --allowlist-type="HitgroupRecord" \
-  --allowlist-function="optix.*" \
+  --allowlist-function="optixQueryFunctionTable" \
   --allowlist-var="OptixSbtRecordHeaderSize" \
   --allowlist-var="OptixSbtRecordAlignment" \
   --allowlist-var="OptixAccelBufferByteAlignment" \
@@ -23,6 +23,6 @@ bindgen \
   --with-derive-eq \
   --with-derive-hash \
   --with-derive-ord \
-  --dynamic-loading OptixApi\
+  --vtable-generation \
   wrapper.h -- -I$OPTIX_ROOT_DIR/include -I/opt/cuda/include\
   > src/autogen_optix.rs

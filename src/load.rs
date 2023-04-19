@@ -1,7 +1,9 @@
+use cuda_rs::*;
 use std::env;
+use std::ffi::c_void;
 use std::path::{Path, PathBuf};
 
-use crate::OptixApi;
+use crate::*;
 
 #[cfg(target_os = "windows")]
 fn find_cuda_lib_dirs() -> PathBuf {
@@ -26,9 +28,10 @@ fn find_optix_lib_dirs() -> PathBuf {
     }
 }
 
+const OPTIX_ABI_VERSION: i32 = 55;
 impl OptixApi {
-    pub unsafe fn find_and_load() -> Result<Self, libloading::Error> {
+    pub unsafe fn find_and_load() -> Result<Self, OptixError> {
         let path = find_optix_lib_dirs();
-        unsafe { Self::new(path) }
+        Self::new(path)
     }
 }
