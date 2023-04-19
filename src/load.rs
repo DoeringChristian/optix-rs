@@ -9,7 +9,7 @@ fn find_cuda_lib_dirs() -> PathBuf {
 }
 #[cfg(not(target_os = "windows"))]
 fn find_optix_lib_dirs() -> PathBuf {
-    let globs = ["/usr/lib64/libnvoptix.so*", "/usr/lib/libnvoptix.so*"];
+    let globs = ["/usr/lib64/libnvoptix.so.1"];
 
     let paths = globs
         .iter()

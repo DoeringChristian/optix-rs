@@ -25,4 +25,4 @@ bindgen \
   --with-derive-ord \
   --dynamic-loading OptixApi\
   wrapper.h -- -I$OPTIX_ROOT_DIR/include -I/opt/cuda/include\
-  > src/optix_bidngen.rs
+  > src/autogen_optix.rs
