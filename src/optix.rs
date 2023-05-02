@@ -6,7 +6,7 @@ use cuda_rs::*;
 use crate::OptixError;
 include!("autogen_optix.rs");
 
-const OPTIX_SBT_RECORD_HEADER_SIZE: usize = 32;
+pub const OPTIX_SBT_RECORD_HEADER_SIZE: usize = 32;
 
 pub struct OptixApi {
     lib: libloading::Library,
