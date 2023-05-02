@@ -43,6 +43,17 @@ impl<T> ::std::cmp::PartialEq for __BindgenUnionField<T> {
     }
 }
 impl<T> ::std::cmp::Eq for __BindgenUnionField<T> {}
+pub const OPTIX_VERSION: u32 = 70500;
+pub const OPTIX_SBT_RECORD_ALIGNMENT: u32 = 16;
+pub const OPTIX_ACCEL_BUFFER_BYTE_ALIGNMENT: u32 = 128;
+pub const OPTIX_INSTANCE_BYTE_ALIGNMENT: u32 = 16;
+pub const OPTIX_AABB_BUFFER_BYTE_ALIGNMENT: u32 = 8;
+pub const OPTIX_GEOMETRY_TRANSFORM_BYTE_ALIGNMENT: u32 = 16;
+pub const OPTIX_TRANSFORM_BYTE_ALIGNMENT: u32 = 64;
+pub const OPTIX_COMPILE_DEFAULT_MAX_REGISTER_COUNT: u32 = 0;
+pub const OPTIX_COMPILE_DEFAULT_MAX_PAYLOAD_TYPE_COUNT: u32 = 8;
+pub const OPTIX_COMPILE_DEFAULT_MAX_PAYLOAD_VALUE_COUNT: u32 = 32;
+pub const OPTIX_ABI_VERSION: u32 = 60;
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct OptixDeviceContext_t {

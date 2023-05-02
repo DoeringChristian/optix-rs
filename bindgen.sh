@@ -17,6 +17,7 @@ bindgen \
   --allowlist-var="OptixVersion" \
   --allowlist-var="OptixBuildInputSize" \
   --allowlist-var="OptixShaderBindingTableSize" \
+  --allowlist-var="OPTIX_.*" \
   --blocklist-type="^CU.*" \
   --default-enum-style=rust \
   --with-derive-default \
