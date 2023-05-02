@@ -101,7 +101,7 @@ pub type OptixTraversableHandle = ::std::os::raw::c_ulonglong;
 #[doc = " Visibility mask"]
 pub type OptixVisibilityMask = ::std::os::raw::c_uint;
 #[repr(u32)]
-#[doc = " Result codes returned from API functions\n\n All host side API functions return OptixResult with the exception of optixGetErrorName\n and optixGetErrorString.  When successful OPTIX_SUCCESS is returned.  All return codes\n except for OPTIX_SUCCESS should be assumed to be errors as opposed to a warning.\n\n \\see #optixGetErrorName(), #optixGetErrorString()"]
+#[doc = " Result codes returned from API functions\n\n All host side API functions return OptixResult with the exception of\n optixGetErrorName and optixGetErrorString.  When successful OPTIX_SUCCESS is\n returned.  All return codes except for OPTIX_SUCCESS should be assumed to be\n errors as opposed to a warning.\n\n \\see #optixGetErrorName(), #optixGetErrorString()"]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum OptixResult {
     OPTIX_SUCCESS = 0,
@@ -150,15 +150,15 @@ pub enum OptixResult {
 #[doc = " Parameters used for #optixDeviceContextGetProperty()\n\n \\see #optixDeviceContextGetProperty()"]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum OptixDeviceProperty {
-    #[doc = " Maximum value for OptixPipelineLinkOptions::maxTraceDepth. sizeof( unsigned int )"]
+    #[doc = " Maximum value for OptixPipelineLinkOptions::maxTraceDepth. sizeof(\n unsigned int )"]
     OPTIX_DEVICE_PROPERTY_LIMIT_MAX_TRACE_DEPTH = 8193,
     #[doc = " Maximum value to pass into optixPipelineSetStackSize for parameter\n maxTraversableGraphDepth.v sizeof( unsigned int )"]
     OPTIX_DEVICE_PROPERTY_LIMIT_MAX_TRAVERSABLE_GRAPH_DEPTH = 8194,
-    #[doc = " The maximum number of primitives (over all build inputs) as input to a single\n Geometry Acceleration Structure (GAS). sizeof( unsigned int )"]
+    #[doc = " The maximum number of primitives (over all build inputs) as input to a\n single Geometry Acceleration Structure (GAS). sizeof( unsigned int )"]
     OPTIX_DEVICE_PROPERTY_LIMIT_MAX_PRIMITIVES_PER_GAS = 8195,
-    #[doc = " The maximum number of instances (over all build inputs) as input to a single\n Instance Acceleration Structure (IAS). sizeof( unsigned int )"]
+    #[doc = " The maximum number of instances (over all build inputs) as input to a\n single Instance Acceleration Structure (IAS). sizeof( unsigned int )"]
     OPTIX_DEVICE_PROPERTY_LIMIT_MAX_INSTANCES_PER_IAS = 8196,
-    #[doc = " The RT core version supported by the device (0 for no support, 10 for version\n 1.0). sizeof( unsigned int )"]
+    #[doc = " The RT core version supported by the device (0 for no support, 10 for\n version 1.0). sizeof( unsigned int )"]
     OPTIX_DEVICE_PROPERTY_RTCORE_VERSION = 8197,
     #[doc = " The maximum value for #OptixInstance::instanceId. sizeof( unsigned int )"]
     OPTIX_DEVICE_PROPERTY_LIMIT_MAX_INSTANCE_ID = 8198,
@@ -169,7 +169,7 @@ pub enum OptixDeviceProperty {
     #[doc = " The maximum value for #OptixInstance::sbtOffset. sizeof( unsigned int )"]
     OPTIX_DEVICE_PROPERTY_LIMIT_MAX_SBT_OFFSET = 8201,
 }
-#[doc = " Type of the callback function used for log messages.\n\n \\param[in] level      The log level indicates the severity of the message. See below for\n                       possible values.\n \\param[in] tag        A terse message category description (e.g., 'SCENE STAT').\n \\param[in] message    Null terminated log message (without newline at the end).\n \\param[in] cbdata     Callback data that was provided with the callback pointer.\n\n It is the users responsibility to ensure thread safety within this function.\n\n The following log levels are defined.\n\n   0   disable   Setting the callback level will disable all messages.  The callback\n                 function will not be called in this case.\n   1   fatal     A non-recoverable error. The context and/or OptiX itself might no longer\n                 be in a usable state.\n   2   error     A recoverable error, e.g., when passing invalid call parameters.\n   3   warning   Hints that OptiX might not behave exactly as requested by the user or\n                 may perform slower than expected.\n   4   print     Status or progress messages.\n\n Higher levels might occur.\n\n \\see #optixDeviceContextSetLogCallback(), #OptixDeviceContextOptions"]
+#[doc = " Type of the callback function used for log messages.\n\n \\param[in] level      The log level indicates the severity of the message.\n See below for\n                       possible values.\n \\param[in] tag        A terse message category description (e.g., 'SCENE\n STAT'). \\param[in] message    Null terminated log message (without newline\n at the end). \\param[in] cbdata     Callback data that was provided with the\n callback pointer.\n\n It is the users responsibility to ensure thread safety within this function.\n\n The following log levels are defined.\n\n   0   disable   Setting the callback level will disable all messages.  The\n   callback\n                 function will not be called in this case.\n   1   fatal     A non-recoverable error. The context and/or OptiX itself\n   might no longer\n                 be in a usable state.\n   2   error     A recoverable error, e.g., when passing invalid call\n   parameters. 3   warning   Hints that OptiX might not behave exactly as\n   requested by the user or\n                 may perform slower than expected.\n   4   print     Status or progress messages.\n\n Higher levels might occur.\n\n \\see #optixDeviceContextSetLogCallback(), #OptixDeviceContextOptions"]
 pub type OptixLogCallback = ::std::option::Option<
     unsafe extern "C" fn(
         level: ::std::os::raw::c_uint,
@@ -179,7 +179,7 @@ pub type OptixLogCallback = ::std::option::Option<
     ),
 >;
 #[repr(u32)]
-#[doc = " Validation mode settings.\n\n When enabled, certain device code utilities will be enabled to provide as good debug and\n error checking facilities as possible.\n\n\n \\see #optixDeviceContextCreate()"]
+#[doc = " Validation mode settings.\n\n When enabled, certain device code utilities will be enabled to provide as\n good debug and error checking facilities as possible.\n\n\n \\see #optixDeviceContextCreate()"]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum OptixDeviceContextValidationMode {
     OPTIX_DEVICE_CONTEXT_VALIDATION_MODE_OFF = 0,
@@ -191,7 +191,7 @@ pub enum OptixDeviceContextValidationMode {
 pub struct OptixDeviceContextOptions {
     #[doc = " Function pointer used when OptiX wishes to generate messages"]
     pub logCallbackFunction: OptixLogCallback,
-    #[doc = " Pointer stored and passed to logCallbackFunction when a message is generated"]
+    #[doc = " Pointer stored and passed to logCallbackFunction when a message is\n generated"]
     pub logCallbackData: *mut ::std::os::raw::c_void,
     #[doc = " Maximum callback level to generate message for (see #OptixLogCallback)"]
     pub logCallbackLevel: ::std::os::raw::c_int,
@@ -269,11 +269,11 @@ impl Default for OptixDeviceContextOptions {
 pub enum OptixGeometryFlags {
     #[doc = " No flags set"]
     OPTIX_GEOMETRY_FLAG_NONE = 0,
-    #[doc = " Disables the invocation of the anyhit program.\n Can be overridden by OPTIX_INSTANCE_FLAG_ENFORCE_ANYHIT and OPTIX_RAY_FLAG_ENFORCE_ANYHIT."]
+    #[doc = " Disables the invocation of the anyhit program.\n Can be overridden by OPTIX_INSTANCE_FLAG_ENFORCE_ANYHIT and\n OPTIX_RAY_FLAG_ENFORCE_ANYHIT."]
     OPTIX_GEOMETRY_FLAG_DISABLE_ANYHIT = 1,
-    #[doc = " If set, an intersection with the primitive will trigger one and only one\n invocation of the anyhit program.  Otherwise, the anyhit program may be invoked\n more than once."]
+    #[doc = " If set, an intersection with the primitive will trigger one and only one\n invocation of the anyhit program.  Otherwise, the anyhit program may be\n invoked more than once."]
     OPTIX_GEOMETRY_FLAG_REQUIRE_SINGLE_ANYHIT_CALL = 2,
-    #[doc = " Prevent triangles from getting culled due to their orientation.\n Effectively ignores ray flags\n OPTIX_RAY_FLAG_CULL_BACK_FACING_TRIANGLES and OPTIX_RAY_FLAG_CULL_FRONT_FACING_TRIANGLES."]
+    #[doc = " Prevent triangles from getting culled due to their orientation.\n Effectively ignores ray flags\n OPTIX_RAY_FLAG_CULL_BACK_FACING_TRIANGLES and\n OPTIX_RAY_FLAG_CULL_FRONT_FACING_TRIANGLES."]
     OPTIX_GEOMETRY_FLAG_DISABLE_TRIANGLE_FACE_CULLING = 4,
 }
 #[repr(u32)]
@@ -289,7 +289,7 @@ pub enum OptixHitKind {
 #[doc = " Format of indices used int #OptixBuildInputTriangleArray::indexFormat."]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum OptixIndicesFormat {
-    #[doc = " No indices, this format must only be used in combination with triangle soups, i.e., numIndexTriplets must be zero"]
+    #[doc = " No indices, this format must only be used in combination with triangle\n soups, i.e., numIndexTriplets must be zero"]
     OPTIX_INDICES_FORMAT_NONE = 0,
     #[doc = " Three shorts"]
     OPTIX_INDICES_FORMAT_UNSIGNED_SHORT3 = 8450,
@@ -302,11 +302,8 @@ pub enum OptixIndicesFormat {
 pub enum OptixVertexFormat {
     #[doc = "< No vertices"]
     OPTIX_VERTEX_FORMAT_NONE = 0,
-    #[doc = "< Vertices are represented by three floats"]
     OPTIX_VERTEX_FORMAT_FLOAT3 = 8481,
-    #[doc = "< Vertices are represented by two floats"]
     OPTIX_VERTEX_FORMAT_FLOAT2 = 8482,
-    #[doc = "< Vertices are represented by three halfs"]
     OPTIX_VERTEX_FORMAT_HALF3 = 8483,
     #[doc = "< Vertices are represented by two halfs"]
     OPTIX_VERTEX_FORMAT_HALF2 = 8484,
@@ -317,43 +314,41 @@ pub enum OptixVertexFormat {
 #[doc = " Format of transform used in #OptixBuildInputTriangleArray::transformFormat."]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum OptixTransformFormat {
-    #[doc = "< no transform, default for zero initialization"]
     OPTIX_TRANSFORM_FORMAT_NONE = 0,
-    #[doc = "< 3x4 row major affine matrix"]
     OPTIX_TRANSFORM_FORMAT_MATRIX_FLOAT12 = 8673,
 }
 #[doc = " Triangle inputs\n\n \\see #OptixBuildInput::triangleArray"]
 #[repr(C)]
 pub struct OptixBuildInputTriangleArray {
-    #[doc = " Points to host array of device pointers, one per motion step. Host array size must match the number of\n motion keys as set in #OptixMotionOptions (or an array of size 1 if OptixMotionOptions::numKeys is set\n to 0 or 1). Each per motion key device pointer must point to an array of vertices of the\n triangles in the format as described by vertexFormat. The minimum alignment must match the natural\n alignment of the type as specified in the vertexFormat, i.e., for OPTIX_VERTEX_FORMAT_FLOATX 4-byte,\n for all others a 2-byte alignment. However, an 16-byte stride (and buffer alignment) is recommended for\n vertices of format OPTIX_VERTEX_FORMAT_FLOAT3 for GAS build performance."]
+    #[doc = " Points to host array of device pointers, one per motion step. Host array\n size must match the number of motion keys as set in #OptixMotionOptions\n (or an array of size 1 if OptixMotionOptions::numKeys is set to 0 or 1).\n Each per motion key device pointer must point to an array of vertices of\n the triangles in the format as described by vertexFormat. The minimum\n alignment must match the natural alignment of the type as specified in the\n vertexFormat, i.e., for OPTIX_VERTEX_FORMAT_FLOATX 4-byte, for all others\n a 2-byte alignment. However, an 16-byte stride (and buffer alignment) is\n recommended for vertices of format OPTIX_VERTEX_FORMAT_FLOAT3 for GAS\n build performance."]
     pub vertexBuffers: *const CUdeviceptr,
-    #[doc = " Number of vertices in each of buffer in OptixBuildInputTriangleArray::vertexBuffers."]
+    #[doc = " Number of vertices in each of buffer in\n OptixBuildInputTriangleArray::vertexBuffers."]
     pub numVertices: ::std::os::raw::c_uint,
     #[doc = " \\see #OptixVertexFormat"]
     pub vertexFormat: OptixVertexFormat,
-    #[doc = " Stride between vertices. If set to zero, vertices are assumed to be tightly\n packed and stride is inferred from vertexFormat."]
+    #[doc = " Stride between vertices. If set to zero, vertices are assumed to be\n tightly packed and stride is inferred from vertexFormat."]
     pub vertexStrideInBytes: ::std::os::raw::c_uint,
-    #[doc = " Optional pointer to array of 16 or 32-bit int triplets, one triplet per triangle.\n The minimum alignment must match the natural alignment of the type as specified in the indexFormat, i.e.,\n for OPTIX_INDICES_FORMAT_UNSIGNED_INT3 4-byte and for OPTIX_INDICES_FORMAT_UNSIGNED_SHORT3 a 2-byte alignment."]
+    #[doc = " Optional pointer to array of 16 or 32-bit int triplets, one triplet per\n triangle. The minimum alignment must match the natural alignment of the\n type as specified in the indexFormat, i.e., for\n OPTIX_INDICES_FORMAT_UNSIGNED_INT3 4-byte and for\n OPTIX_INDICES_FORMAT_UNSIGNED_SHORT3 a 2-byte alignment."]
     pub indexBuffer: CUdeviceptr,
-    #[doc = " Size of array in OptixBuildInputTriangleArray::indexBuffer. For build, needs to be zero if indexBuffer is \\c nullptr."]
+    #[doc = " Size of array in OptixBuildInputTriangleArray::indexBuffer. For build,\n needs to be zero if indexBuffer is \\c nullptr."]
     pub numIndexTriplets: ::std::os::raw::c_uint,
     #[doc = " \\see #OptixIndicesFormat"]
     pub indexFormat: OptixIndicesFormat,
-    #[doc = " Stride between triplets of indices. If set to zero, indices are assumed to be tightly\n packed and stride is inferred from indexFormat."]
+    #[doc = " Stride between triplets of indices. If set to zero, indices are assumed to\n be tightly packed and stride is inferred from indexFormat."]
     pub indexStrideInBytes: ::std::os::raw::c_uint,
-    #[doc = " Optional pointer to array of floats\n representing a 3x4 row major affine\n transformation matrix. This pointer must be a multiple of OPTIX_GEOMETRY_TRANSFORM_BYTE_ALIGNMENT"]
+    #[doc = " Optional pointer to array of floats\n representing a 3x4 row major affine\n transformation matrix. This pointer must be a multiple of\n OPTIX_GEOMETRY_TRANSFORM_BYTE_ALIGNMENT"]
     pub preTransform: CUdeviceptr,
     #[doc = " Array of flags, to specify flags per sbt record,\n combinations of OptixGeometryFlags describing the\n primitive behavior, size must match numSbtRecords"]
     pub flags: *const ::std::os::raw::c_uint,
     #[doc = " Number of sbt records available to the sbt index offset override."]
     pub numSbtRecords: ::std::os::raw::c_uint,
-    #[doc = " Device pointer to per-primitive local sbt index offset buffer. May be NULL.\n Every entry must be in range [0,numSbtRecords-1].\n Size needs to be the number of primitives."]
+    #[doc = " Device pointer to per-primitive local sbt index offset buffer. May be\n NULL. Every entry must be in range [0,numSbtRecords-1]. Size needs to be\n the number of primitives."]
     pub sbtIndexOffsetBuffer: CUdeviceptr,
-    #[doc = " Size of type of the sbt index offset. Needs to be 0, 1, 2 or 4 (8, 16 or 32 bit)."]
+    #[doc = " Size of type of the sbt index offset. Needs to be 0, 1, 2 or 4 (8, 16 or\n 32 bit)."]
     pub sbtIndexOffsetSizeInBytes: ::std::os::raw::c_uint,
-    #[doc = " Stride between the index offsets. If set to zero, the offsets are assumed to be tightly\n packed and the stride matches the size of the type (sbtIndexOffsetSizeInBytes)."]
+    #[doc = " Stride between the index offsets. If set to zero, the offsets are assumed\n to be tightly packed and the stride matches the size of the type\n (sbtIndexOffsetSizeInBytes)."]
     pub sbtIndexOffsetStrideInBytes: ::std::os::raw::c_uint,
-    #[doc = " Primitive index bias, applied in optixGetPrimitiveIndex().\n Sum of primitiveIndexOffset and number of triangles must not overflow 32bits."]
+    #[doc = " Primitive index bias, applied in optixGetPrimitiveIndex().\n Sum of primitiveIndexOffset and number of triangles must not overflow\n 32bits."]
     pub primitiveIndexOffset: ::std::os::raw::c_uint,
     #[doc = " \\see #OptixTransformFormat"]
     pub transformFormat: OptixTransformFormat,
@@ -585,25 +580,25 @@ pub enum OptixPrimitiveTypeFlags {
 #[doc = " Curve end cap types, for non-linear curves\n"]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum OptixCurveEndcapFlags {
-    #[doc = " Default end caps. Round end caps for linear, no end caps for quadratic/cubic."]
+    #[doc = " Default end caps. Round end caps for linear, no end caps for\n quadratic/cubic."]
     OPTIX_CURVE_ENDCAP_DEFAULT = 0,
-    #[doc = " Flat end caps at both ends of quadratic/cubic curve segments. Not valid for linear."]
+    #[doc = " Flat end caps at both ends of quadratic/cubic curve segments. Not valid\n for linear."]
     OPTIX_CURVE_ENDCAP_ON = 1,
 }
-#[doc = " Curve inputs\n\n A curve is a swept surface defined by a 3D spline curve and a varying width (radius). A curve (or \"strand\") of\n degree d (3=cubic, 2=quadratic, 1=linear) is represented by N > d vertices and N width values, and comprises N - d segments.\n Each segment is defined by d+1 consecutive vertices. Each curve may have a different number of vertices.\n\n OptiX describes the curve array as a list of curve segments. The primitive id is the segment number.\n It is the user's responsibility to maintain a mapping between curves and curve segments.\n Each index buffer entry i = indexBuffer[primid] specifies the start of a curve segment,\n represented by d+1 consecutive vertices in the vertex buffer,\n and d+1 consecutive widths in the width buffer. Width is interpolated the same\n way vertices are interpolated, that is, using the curve basis.\n\n Each curves build input has only one SBT record.\n To create curves with different materials in the same BVH, use multiple build inputs.\n\n \\see #OptixBuildInput::curveArray"]
+#[doc = " Curve inputs\n\n A curve is a swept surface defined by a 3D spline curve and a varying width\n (radius). A curve (or \"strand\") of degree d (3=cubic, 2=quadratic, 1=linear)\n is represented by N > d vertices and N width values, and comprises N - d\n segments. Each segment is defined by d+1 consecutive vertices. Each curve\n may have a different number of vertices.\n\n OptiX describes the curve array as a list of curve segments. The primitive\n id is the segment number. It is the user's responsibility to maintain a\n mapping between curves and curve segments. Each index buffer entry i =\n indexBuffer[primid] specifies the start of a curve segment, represented by\n d+1 consecutive vertices in the vertex buffer, and d+1 consecutive widths in\n the width buffer. Width is interpolated the same way vertices are\n interpolated, that is, using the curve basis.\n\n Each curves build input has only one SBT record.\n To create curves with different materials in the same BVH, use multiple\n build inputs.\n\n \\see #OptixBuildInput::curveArray"]
 #[repr(C)]
 pub struct OptixBuildInputCurveArray {
     #[doc = " Curve degree and basis\n \\see #OptixPrimitiveType"]
     pub curveType: OptixPrimitiveType,
     #[doc = " Number of primitives. Each primitive is a polynomial curve segment."]
     pub numPrimitives: ::std::os::raw::c_uint,
-    #[doc = " Pointer to host array of device pointers, one per motion step. Host array size must match number of\n motion keys as set in #OptixMotionOptions (or an array of size 1 if OptixMotionOptions::numKeys is set\n to 1). Each per-motion-key device pointer must point to an array of floats (the vertices of the\n curves)."]
+    #[doc = " Pointer to host array of device pointers, one per motion step. Host array\n size must match number of motion keys as set in #OptixMotionOptions (or an\n array of size 1 if OptixMotionOptions::numKeys is set to 1). Each\n per-motion-key device pointer must point to an array of floats (the\n vertices of the curves)."]
     pub vertexBuffers: *const CUdeviceptr,
     #[doc = " Number of vertices in each buffer in vertexBuffers."]
     pub numVertices: ::std::os::raw::c_uint,
-    #[doc = " Stride between vertices. If set to zero, vertices are assumed to be tightly\n packed and stride is sizeof( float3 )."]
+    #[doc = " Stride between vertices. If set to zero, vertices are assumed to be\n tightly packed and stride is sizeof( float3 )."]
     pub vertexStrideInBytes: ::std::os::raw::c_uint,
-    #[doc = " Parallel to vertexBuffers: a device pointer per motion step, each with numVertices float values,\n specifying the curve width (radius) corresponding to each vertex."]
+    #[doc = " Parallel to vertexBuffers: a device pointer per motion step, each with\n numVertices float values, specifying the curve width (radius)\n corresponding to each vertex."]
     pub widthBuffers: *const CUdeviceptr,
     #[doc = " Stride between widths. If set to zero, widths are assumed to be tightly\n packed and stride is sizeof( float )."]
     pub widthStrideInBytes: ::std::os::raw::c_uint,
@@ -617,7 +612,7 @@ pub struct OptixBuildInputCurveArray {
     pub indexStrideInBytes: ::std::os::raw::c_uint,
     #[doc = " Combination of OptixGeometryFlags describing the\n primitive behavior."]
     pub flag: ::std::os::raw::c_uint,
-    #[doc = " Primitive index bias, applied in optixGetPrimitiveIndex().\n Sum of primitiveIndexOffset and number of primitives must not overflow 32bits."]
+    #[doc = " Primitive index bias, applied in optixGetPrimitiveIndex().\n Sum of primitiveIndexOffset and number of primitives must not overflow\n 32bits."]
     pub primitiveIndexOffset: ::std::os::raw::c_uint,
     #[doc = " End cap flags, see OptixCurveEndcapFlags"]
     pub endcapFlags: ::std::os::raw::c_uint,
@@ -787,32 +782,32 @@ impl Default for OptixBuildInputCurveArray {
         }
     }
 }
-#[doc = " Sphere inputs\n\n A sphere is defined by a center point and a radius.\n Each center point is represented by a vertex in the vertex buffer.\n There is either a single radius for all spheres, or the radii are represented by entries in the radius buffer.\n\n The vertex buffers and radius buffers point to a host array of device pointers, one per motion step.\n Host array size must match the number of motion keys as set in #OptixMotionOptions (or an array of size 1 if OptixMotionOptions::numKeys is set\n to 0 or 1). Each per motion key device pointer must point to an array of vertices corresponding to the center points of the spheres, or\n an array of 1 or N radii. Format OPTIX_VERTEX_FORMAT_FLOAT3 is used for vertices, OPTIX_VERTEX_FORMAT_FLOAT for radii.\n\n \\see #OptixBuildInput::sphereArray"]
+#[doc = " Sphere inputs\n\n A sphere is defined by a center point and a radius.\n Each center point is represented by a vertex in the vertex buffer.\n There is either a single radius for all spheres, or the radii are\n represented by entries in the radius buffer.\n\n The vertex buffers and radius buffers point to a host array of device\n pointers, one per motion step. Host array size must match the number of\n motion keys as set in #OptixMotionOptions (or an array of size 1 if\n OptixMotionOptions::numKeys is set to 0 or 1). Each per motion key device\n pointer must point to an array of vertices corresponding to the center\n points of the spheres, or an array of 1 or N radii. Format\n OPTIX_VERTEX_FORMAT_FLOAT3 is used for vertices, OPTIX_VERTEX_FORMAT_FLOAT\n for radii.\n\n \\see #OptixBuildInput::sphereArray"]
 #[repr(C)]
 pub struct OptixBuildInputSphereArray {
-    #[doc = " Pointer to host array of device pointers, one per motion step. Host array size must match number of\n motion keys as set in #OptixMotionOptions (or an array of size 1 if OptixMotionOptions::numKeys is set\n to 1). Each per-motion-key device pointer must point to an array of floats (the center points of\n the spheres)."]
+    #[doc = " Pointer to host array of device pointers, one per motion step. Host array\n size must match number of motion keys as set in #OptixMotionOptions (or an\n array of size 1 if OptixMotionOptions::numKeys is set to 1). Each\n per-motion-key device pointer must point to an array of floats (the center\n points of the spheres)."]
     pub vertexBuffers: *const CUdeviceptr,
-    #[doc = " Stride between vertices. If set to zero, vertices are assumed to be tightly\n packed and stride is sizeof( float3 )."]
+    #[doc = " Stride between vertices. If set to zero, vertices are assumed to be\n tightly packed and stride is sizeof( float3 )."]
     pub vertexStrideInBytes: ::std::os::raw::c_uint,
     #[doc = " Number of vertices in each buffer in vertexBuffers."]
     pub numVertices: ::std::os::raw::c_uint,
-    #[doc = " Parallel to vertexBuffers: a device pointer per motion step, each with numRadii float values,\n specifying the sphere radius corresponding to each vertex."]
+    #[doc = " Parallel to vertexBuffers: a device pointer per motion step, each with\n numRadii float values, specifying the sphere radius corresponding to each\n vertex."]
     pub radiusBuffers: *const CUdeviceptr,
     #[doc = " Stride between radii. If set to zero, widths are assumed to be tightly\n packed and stride is sizeof( float )."]
     pub radiusStrideInBytes: ::std::os::raw::c_uint,
-    #[doc = " Boolean value indicating whether a single radius per radius buffer is used,\n or the number of radii in radiusBuffers equals numVertices."]
+    #[doc = " Boolean value indicating whether a single radius per radius buffer is\n used, or the number of radii in radiusBuffers equals numVertices."]
     pub singleRadius: ::std::os::raw::c_int,
     #[doc = " Array of flags, to specify flags per sbt record,\n combinations of OptixGeometryFlags describing the\n primitive behavior, size must match numSbtRecords"]
     pub flags: *const ::std::os::raw::c_uint,
     #[doc = " Number of sbt records available to the sbt index offset override."]
     pub numSbtRecords: ::std::os::raw::c_uint,
-    #[doc = " Device pointer to per-primitive local sbt index offset buffer. May be NULL.\n Every entry must be in range [0,numSbtRecords-1].\n Size needs to be the number of primitives."]
+    #[doc = " Device pointer to per-primitive local sbt index offset buffer. May be\n NULL. Every entry must be in range [0,numSbtRecords-1]. Size needs to be\n the number of primitives."]
     pub sbtIndexOffsetBuffer: CUdeviceptr,
-    #[doc = " Size of type of the sbt index offset. Needs to be 0, 1, 2 or 4 (8, 16 or 32 bit)."]
+    #[doc = " Size of type of the sbt index offset. Needs to be 0, 1, 2 or 4 (8, 16 or\n 32 bit)."]
     pub sbtIndexOffsetSizeInBytes: ::std::os::raw::c_uint,
-    #[doc = " Stride between the sbt index offsets. If set to zero, the offsets are assumed to be tightly\n packed and the stride matches the size of the type (sbtIndexOffsetSizeInBytes)."]
+    #[doc = " Stride between the sbt index offsets. If set to zero, the offsets are\n assumed to be tightly packed and the stride matches the size of the type\n (sbtIndexOffsetSizeInBytes)."]
     pub sbtIndexOffsetStrideInBytes: ::std::os::raw::c_uint,
-    #[doc = " Primitive index bias, applied in optixGetPrimitiveIndex().\n Sum of primitiveIndexOffset and number of primitives must not overflow 32bits."]
+    #[doc = " Primitive index bias, applied in optixGetPrimitiveIndex().\n Sum of primitiveIndexOffset and number of primitives must not overflow\n 32bits."]
     pub primitiveIndexOffset: ::std::os::raw::c_uint,
 }
 #[test]
@@ -1055,23 +1050,23 @@ fn bindgen_test_layout_OptixAabb() {
 #[doc = " Custom primitive inputs\n\n \\see #OptixBuildInput::customPrimitiveArray"]
 #[repr(C)]
 pub struct OptixBuildInputCustomPrimitiveArray {
-    #[doc = " Points to host array of device pointers to AABBs (type OptixAabb), one per motion step.\n Host array size must match number of motion keys as set in OptixMotionOptions (or an array of size 1\n if OptixMotionOptions::numKeys is set to 1).\n Each device pointer must be a multiple of OPTIX_AABB_BUFFER_BYTE_ALIGNMENT."]
+    #[doc = " Points to host array of device pointers to AABBs (type OptixAabb), one per\n motion step. Host array size must match number of motion keys as set in\n OptixMotionOptions (or an array of size 1 if OptixMotionOptions::numKeys\n is set to 1). Each device pointer must be a multiple of\n OPTIX_AABB_BUFFER_BYTE_ALIGNMENT."]
     pub aabbBuffers: *const CUdeviceptr,
     #[doc = " Number of primitives in each buffer (i.e., per motion step) in\n #OptixBuildInputCustomPrimitiveArray::aabbBuffers."]
     pub numPrimitives: ::std::os::raw::c_uint,
-    #[doc = " Stride between AABBs (per motion key). If set to zero, the aabbs are assumed to be tightly\n packed and the stride is assumed to be sizeof( OptixAabb ).\n If non-zero, the value must be a multiple of OPTIX_AABB_BUFFER_BYTE_ALIGNMENT."]
+    #[doc = " Stride between AABBs (per motion key). If set to zero, the aabbs are\n assumed to be tightly packed and the stride is assumed to be sizeof(\n OptixAabb ). If non-zero, the value must be a multiple of\n OPTIX_AABB_BUFFER_BYTE_ALIGNMENT."]
     pub strideInBytes: ::std::os::raw::c_uint,
     #[doc = " Array of flags, to specify flags per sbt record,\n combinations of OptixGeometryFlags describing the\n primitive behavior, size must match numSbtRecords"]
     pub flags: *const ::std::os::raw::c_uint,
     #[doc = " Number of sbt records available to the sbt index offset override."]
     pub numSbtRecords: ::std::os::raw::c_uint,
-    #[doc = " Device pointer to per-primitive local sbt index offset buffer. May be NULL.\n Every entry must be in range [0,numSbtRecords-1].\n Size needs to be the number of primitives."]
+    #[doc = " Device pointer to per-primitive local sbt index offset buffer. May be\n NULL. Every entry must be in range [0,numSbtRecords-1]. Size needs to be\n the number of primitives."]
     pub sbtIndexOffsetBuffer: CUdeviceptr,
-    #[doc = " Size of type of the sbt index offset. Needs to be 0, 1, 2 or 4 (8, 16 or 32 bit)."]
+    #[doc = " Size of type of the sbt index offset. Needs to be 0, 1, 2 or 4 (8, 16 or\n 32 bit)."]
     pub sbtIndexOffsetSizeInBytes: ::std::os::raw::c_uint,
-    #[doc = " Stride between the index offsets. If set to zero, the offsets are assumed to be tightly\n packed and the stride matches the size of the type (sbtIndexOffsetSizeInBytes)."]
+    #[doc = " Stride between the index offsets. If set to zero, the offsets are assumed\n to be tightly packed and the stride matches the size of the type\n (sbtIndexOffsetSizeInBytes)."]
     pub sbtIndexOffsetStrideInBytes: ::std::os::raw::c_uint,
-    #[doc = " Primitive index bias, applied in optixGetPrimitiveIndex().\n Sum of primitiveIndexOffset and number of primitive must not overflow 32bits."]
+    #[doc = " Primitive index bias, applied in optixGetPrimitiveIndex().\n Sum of primitiveIndexOffset and number of primitive must not overflow\n 32bits."]
     pub primitiveIndexOffset: ::std::os::raw::c_uint,
 }
 #[test]
@@ -1195,7 +1190,7 @@ impl Default for OptixBuildInputCustomPrimitiveArray {
 #[doc = " Instance and instance pointer inputs\n\n \\see #OptixBuildInput::instanceArray"]
 #[repr(C)]
 pub struct OptixBuildInputInstanceArray {
-    #[doc = " If OptixBuildInput::type is OPTIX_BUILD_INPUT_TYPE_INSTANCE_POINTERS instances and\n aabbs should be interpreted as arrays of pointers instead of arrays of structs.\n\n This pointer must be a multiple of OPTIX_INSTANCE_BYTE_ALIGNMENT if\n OptixBuildInput::type is OPTIX_BUILD_INPUT_TYPE_INSTANCES. The array elements must\n be a multiple of OPTIX_INSTANCE_BYTE_ALIGNMENT if OptixBuildInput::type is\n OPTIX_BUILD_INPUT_TYPE_INSTANCE_POINTERS."]
+    #[doc = " If OptixBuildInput::type is OPTIX_BUILD_INPUT_TYPE_INSTANCE_POINTERS\n instances and aabbs should be interpreted as arrays of pointers instead of\n arrays of structs.\n\n This pointer must be a multiple of OPTIX_INSTANCE_BYTE_ALIGNMENT if\n OptixBuildInput::type is OPTIX_BUILD_INPUT_TYPE_INSTANCES. The array\n elements must be a multiple of OPTIX_INSTANCE_BYTE_ALIGNMENT if\n OptixBuildInput::type is OPTIX_BUILD_INPUT_TYPE_INSTANCE_POINTERS."]
     pub instances: CUdeviceptr,
     #[doc = " Number of elements in #OptixBuildInputInstanceArray::instances."]
     pub numInstances: ::std::os::raw::c_uint,
@@ -1262,7 +1257,7 @@ pub enum OptixBuildInputType {
     #[doc = " Sphere inputs. \\see #OptixBuildInputSphereArray"]
     OPTIX_BUILD_INPUT_TYPE_SPHERES = 8518,
 }
-#[doc = " Build inputs.\n\n All of them support motion and the size of the data arrays needs to match the number of motion steps\n\n \\see #optixAccelComputeMemoryUsage(), #optixAccelBuild()"]
+#[doc = " Build inputs.\n\n All of them support motion and the size of the data arrays needs to match\n the number of motion steps\n\n \\see #optixAccelComputeMemoryUsage(), #optixAccelBuild()"]
 #[repr(C)]
 pub struct OptixBuildInput {
     #[doc = " The type of the build input."]
@@ -1409,9 +1404,9 @@ impl Default for OptixBuildInput {
 pub enum OptixInstanceFlags {
     #[doc = " No special flag set"]
     OPTIX_INSTANCE_FLAG_NONE = 0,
-    #[doc = " Prevent triangles from getting culled due to their orientation.\n Effectively ignores ray flags\n OPTIX_RAY_FLAG_CULL_BACK_FACING_TRIANGLES and OPTIX_RAY_FLAG_CULL_FRONT_FACING_TRIANGLES."]
+    #[doc = " Prevent triangles from getting culled due to their orientation.\n Effectively ignores ray flags\n OPTIX_RAY_FLAG_CULL_BACK_FACING_TRIANGLES and\n OPTIX_RAY_FLAG_CULL_FRONT_FACING_TRIANGLES."]
     OPTIX_INSTANCE_FLAG_DISABLE_TRIANGLE_FACE_CULLING = 1,
-    #[doc = " Flip triangle orientation.\n This affects front/backface culling as well as the reported face in case of a hit."]
+    #[doc = " Flip triangle orientation.\n This affects front/backface culling as well as the reported face in case\n of a hit."]
     OPTIX_INSTANCE_FLAG_FLIP_TRIANGLE_FACING = 2,
     #[doc = " Disable anyhit programs for all geometries of the instance.\n Can be overridden by OPTIX_RAY_FLAG_ENFORCE_ANYHIT.\n This flag is mutually exclusive with OPTIX_INSTANCE_FLAG_ENFORCE_ANYHIT."]
     OPTIX_INSTANCE_FLAG_DISABLE_ANYHIT = 4,
@@ -1424,11 +1419,11 @@ pub enum OptixInstanceFlags {
 pub struct OptixInstance {
     #[doc = " affine object-to-world transformation as 3x4 matrix in row-major layout"]
     pub transform: [f32; 12usize],
-    #[doc = " Application supplied ID. The maximal ID can be queried using OPTIX_DEVICE_PROPERTY_LIMIT_MAX_INSTANCE_ID."]
+    #[doc = " Application supplied ID. The maximal ID can be queried using\n OPTIX_DEVICE_PROPERTY_LIMIT_MAX_INSTANCE_ID."]
     pub instanceId: ::std::os::raw::c_uint,
-    #[doc = " SBT record offset.  Will only be used for instances of geometry acceleration structure (GAS) objects.\n Needs to be set to 0 for instances of instance acceleration structure (IAS) objects. The maximal SBT offset\n can be queried using OPTIX_DEVICE_PROPERTY_LIMIT_MAX_INSTANCE_SBT_OFFSET."]
+    #[doc = " SBT record offset.  Will only be used for instances of geometry\n acceleration structure (GAS) objects. Needs to be set to 0 for instances\n of instance acceleration structure (IAS) objects. The maximal SBT offset\n can be queried using OPTIX_DEVICE_PROPERTY_LIMIT_MAX_INSTANCE_SBT_OFFSET."]
     pub sbtOffset: ::std::os::raw::c_uint,
-    #[doc = " Visibility mask. If rayMask & instanceMask == 0 the instance is culled. The number of available bits can be\n queried using OPTIX_DEVICE_PROPERTY_LIMIT_NUM_BITS_INSTANCE_VISIBILITY_MASK."]
+    #[doc = " Visibility mask. If rayMask & instanceMask == 0 the instance is culled.\n The number of available bits can be queried using\n OPTIX_DEVICE_PROPERTY_LIMIT_NUM_BITS_INSTANCE_VISIBILITY_MASK."]
     pub visibilityMask: ::std::os::raw::c_uint,
     #[doc = " Any combination of OptixInstanceFlags is allowed."]
     pub flags: ::std::os::raw::c_uint,
@@ -1528,13 +1523,13 @@ fn bindgen_test_layout_OptixInstance() {
 pub enum OptixBuildFlags {
     #[doc = " No special flags set."]
     OPTIX_BUILD_FLAG_NONE = 0,
-    #[doc = " Allow updating the build with new vertex positions with subsequent calls to\n optixAccelBuild."]
+    #[doc = " Allow updating the build with new vertex positions with subsequent calls\n to optixAccelBuild."]
     OPTIX_BUILD_FLAG_ALLOW_UPDATE = 1,
-    #[doc = " Allow updating the build with new vertex positions with subsequent calls to\n optixAccelBuild."]
+    #[doc = " Allow updating the build with new vertex positions with subsequent calls\n to optixAccelBuild."]
     OPTIX_BUILD_FLAG_ALLOW_COMPACTION = 2,
-    #[doc = " Allow updating the build with new vertex positions with subsequent calls to\n optixAccelBuild."]
+    #[doc = " Allow updating the build with new vertex positions with subsequent calls\n to optixAccelBuild."]
     OPTIX_BUILD_FLAG_PREFER_FAST_TRACE = 4,
-    #[doc = " Allow updating the build with new vertex positions with subsequent calls to\n optixAccelBuild."]
+    #[doc = " Allow updating the build with new vertex positions with subsequent calls\n to optixAccelBuild."]
     OPTIX_BUILD_FLAG_PREFER_FAST_BUILD = 8,
     #[doc = " Allow random access to build input vertices\n See optixGetTriangleVertexData\n     optixGetLinearCurveVertexData\n     optixGetQuadraticBSplineVertexData\n     optixGetCubicBSplineVertexData\n     optixGetCatmullRomVertexData\n     optixGetSphereData"]
     OPTIX_BUILD_FLAG_ALLOW_RANDOM_VERTEX_ACCESS = 16,
@@ -1542,7 +1537,7 @@ pub enum OptixBuildFlags {
     OPTIX_BUILD_FLAG_ALLOW_RANDOM_INSTANCE_ACCESS = 32,
 }
 #[repr(u32)]
-#[doc = " Enum to specify the acceleration build operation.\n\n Used in OptixAccelBuildOptions, which is then passed to optixAccelBuild and\n optixAccelComputeMemoryUsage, this enum indicates whether to do a build or an update\n of the acceleration structure.\n\n Acceleration structure updates utilize the same acceleration structure, but with\n updated bounds.  Updates are typically much faster than builds, however, large\n perturbations can degrade the quality of the acceleration structure.\n\n \\see #optixAccelComputeMemoryUsage(), #optixAccelBuild(), #OptixAccelBuildOptions"]
+#[doc = " Enum to specify the acceleration build operation.\n\n Used in OptixAccelBuildOptions, which is then passed to optixAccelBuild and\n optixAccelComputeMemoryUsage, this enum indicates whether to do a build or\n an update of the acceleration structure.\n\n Acceleration structure updates utilize the same acceleration structure, but\n with updated bounds.  Updates are typically much faster than builds,\n however, large perturbations can degrade the quality of the acceleration\n structure.\n\n \\see #optixAccelComputeMemoryUsage(), #optixAccelBuild(),\n #OptixAccelBuildOptions"]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum OptixBuildOperation {
     #[doc = " Perform a full build operation"]
@@ -1558,7 +1553,7 @@ pub enum OptixMotionFlags {
     OPTIX_MOTION_FLAG_START_VANISH = 1,
     OPTIX_MOTION_FLAG_END_VANISH = 2,
 }
-#[doc = " Motion options\n\n \\see #OptixAccelBuildOptions::motionOptions, #OptixMatrixMotionTransform::motionOptions,\n      #OptixSRTMotionTransform::motionOptions"]
+#[doc = " Motion options\n\n \\see #OptixAccelBuildOptions::motionOptions,\n #OptixMatrixMotionTransform::motionOptions,\n      #OptixSRTMotionTransform::motionOptions"]
 #[repr(C)]
 #[derive(Debug, Default, Copy, Clone, PartialOrd, PartialEq)]
 pub struct OptixMotionOptions {
@@ -1632,7 +1627,7 @@ fn bindgen_test_layout_OptixMotionOptions() {
 pub struct OptixAccelBuildOptions {
     #[doc = " Combinations of OptixBuildFlags"]
     pub buildFlags: ::std::os::raw::c_uint,
-    #[doc = " If OPTIX_BUILD_OPERATION_UPDATE the output buffer is assumed to contain the result\n of a full build with OPTIX_BUILD_FLAG_ALLOW_UPDATE set and using the same number of\n primitives.  It is updated incrementally to reflect the current position of the\n primitives."]
+    #[doc = " If OPTIX_BUILD_OPERATION_UPDATE the output buffer is assumed to contain\n the result of a full build with OPTIX_BUILD_FLAG_ALLOW_UPDATE set and\n using the same number of primitives.  It is updated incrementally to\n reflect the current position of the primitives."]
     pub operation: OptixBuildOperation,
     #[doc = " Options for motion."]
     pub motionOptions: OptixMotionOptions,
@@ -1692,15 +1687,15 @@ impl Default for OptixAccelBuildOptions {
         }
     }
 }
-#[doc = " Struct for querying builder allocation requirements.\n\n Once queried the sizes should be used to allocate device memory of at least these sizes.\n\n \\see #optixAccelComputeMemoryUsage()"]
+#[doc = " Struct for querying builder allocation requirements.\n\n Once queried the sizes should be used to allocate device memory of at least\n these sizes.\n\n \\see #optixAccelComputeMemoryUsage()"]
 #[repr(C)]
 #[derive(Debug, Default, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct OptixAccelBufferSizes {
-    #[doc = " The size in bytes required for the outputBuffer parameter to optixAccelBuild when\n doing a build (OPTIX_BUILD_OPERATION_BUILD)."]
+    #[doc = " The size in bytes required for the outputBuffer parameter to\n optixAccelBuild when doing a build (OPTIX_BUILD_OPERATION_BUILD)."]
     pub outputSizeInBytes: usize,
-    #[doc = " The size in bytes required for the tempBuffer paramter to optixAccelBuild when\n doing a build (OPTIX_BUILD_OPERATION_BUILD)."]
+    #[doc = " The size in bytes required for the tempBuffer paramter to optixAccelBuild\n when doing a build (OPTIX_BUILD_OPERATION_BUILD)."]
     pub tempSizeInBytes: usize,
-    #[doc = " The size in bytes required for the tempBuffer parameter to optixAccelBuild\n when doing an update (OPTIX_BUILD_OPERATION_UPDATE).  This value can be different\n than tempSizeInBytes used for a full build.  Only non-zero if\n OPTIX_BUILD_FLAG_ALLOW_UPDATE flag is set in OptixAccelBuildOptions."]
+    #[doc = " The size in bytes required for the tempBuffer parameter to optixAccelBuild\n when doing an update (OPTIX_BUILD_OPERATION_UPDATE).  This value can be\n different than tempSizeInBytes used for a full build.  Only non-zero if\n OPTIX_BUILD_FLAG_ALLOW_UPDATE flag is set in OptixAccelBuildOptions."]
     pub tempUpdateSizeInBytes: usize,
 }
 #[test]
@@ -1753,7 +1748,7 @@ fn bindgen_test_layout_OptixAccelBufferSizes() {
 #[doc = " Properties which can be emitted during acceleration structure build.\n\n \\see #OptixAccelEmitDesc::type."]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum OptixAccelPropertyType {
-    #[doc = " Size of a compacted acceleration structure. The device pointer points to a uint64."]
+    #[doc = " Size of a compacted acceleration structure. The device pointer points to a\n uint64."]
     OPTIX_PROPERTY_TYPE_COMPACTED_SIZE = 8577,
     #[doc = " OptixAabb * numMotionSteps"]
     OPTIX_PROPERTY_TYPE_AABBS = 8578,
@@ -1810,7 +1805,7 @@ impl Default for OptixAccelEmitDesc {
         }
     }
 }
-#[doc = " Used to store information related to relocation of acceleration structures.\n\n \\see #optixAccelGetRelocationInfo(), #optixAccelCheckRelocationCompatibility(), #optixAccelRelocate()"]
+#[doc = " Used to store information related to relocation of acceleration structures.\n\n \\see #optixAccelGetRelocationInfo(),\n #optixAccelCheckRelocationCompatibility(), #optixAccelRelocate()"]
 #[repr(C)]
 #[derive(Debug, Default, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct OptixAccelRelocationInfo {
@@ -1843,7 +1838,7 @@ fn bindgen_test_layout_OptixAccelRelocationInfo() {
         )
     );
 }
-#[doc = " Static transform\n\n The device address of instances of this type must be a multiple of OPTIX_TRANSFORM_BYTE_ALIGNMENT.\n\n \\see #optixConvertPointerToTraversableHandle()"]
+#[doc = " Static transform\n\n The device address of instances of this type must be a multiple of\n OPTIX_TRANSFORM_BYTE_ALIGNMENT.\n\n \\see #optixConvertPointerToTraversableHandle()"]
 #[repr(C)]
 #[derive(Debug, Default, Copy, Clone, PartialOrd, PartialEq)]
 pub struct OptixStaticTransform {
@@ -1911,7 +1906,7 @@ fn bindgen_test_layout_OptixStaticTransform() {
         )
     );
 }
-#[doc = " Represents a matrix motion transformation.\n\n The device address of instances of this type must be a multiple of OPTIX_TRANSFORM_BYTE_ALIGNMENT.\n\n This struct, as defined here, handles only N=2 motion keys due to the fixed array length of its transform member.\n The following example shows how to create instances for an arbitrary number N of motion keys:\n\n \\code\n float matrixData[N][12];\n ... // setup matrixData\n\n size_t transformSizeInBytes = sizeof( OptixMatrixMotionTransform ) + ( N-2 ) * 12 * sizeof( float );\n OptixMatrixMotionTransform* matrixMoptionTransform = (OptixMatrixMotionTransform*) malloc( transformSizeInBytes );\n memset( matrixMoptionTransform, 0, transformSizeInBytes );\n\n ... // setup other members of matrixMoptionTransform\n matrixMoptionTransform->motionOptions.numKeys/// = N;\n memcpy( matrixMoptionTransform->transform, matrixData, N * 12 * sizeof( float ) );\n\n ... // copy matrixMoptionTransform to device memory\n free( matrixMoptionTransform )\n \\endcode\n\n \\see #optixConvertPointerToTraversableHandle()"]
+#[doc = " Represents a matrix motion transformation.\n\n The device address of instances of this type must be a multiple of\n OPTIX_TRANSFORM_BYTE_ALIGNMENT.\n\n This struct, as defined here, handles only N=2 motion keys due to the fixed\n array length of its transform member. The following example shows how to\n create instances for an arbitrary number N of motion keys:\n\n \\code\n float matrixData[N][12];\n ... // setup matrixData\n\n size_t transformSizeInBytes = sizeof( OptixMatrixMotionTransform ) + ( N-2 )\n * 12 * sizeof( float ); OptixMatrixMotionTransform* matrixMoptionTransform =\n (OptixMatrixMotionTransform*) malloc( transformSizeInBytes ); memset(\n matrixMoptionTransform, 0, transformSizeInBytes );\n\n ... // setup other members of matrixMoptionTransform\n matrixMoptionTransform->motionOptions.numKeys/// = N;\n memcpy( matrixMoptionTransform->transform, matrixData, N * 12 * sizeof(\n float ) );\n\n ... // copy matrixMoptionTransform to device memory\n free( matrixMoptionTransform )\n \\endcode\n\n \\see #optixConvertPointerToTraversableHandle()"]
 #[repr(C)]
 #[derive(Debug, Default, Copy, Clone, PartialOrd, PartialEq)]
 pub struct OptixMatrixMotionTransform {
@@ -1980,7 +1975,7 @@ fn bindgen_test_layout_OptixMatrixMotionTransform() {
         )
     );
 }
-#[doc = " defines another translation that is applied after the rotation. Typically, this translation includes\n the inverse translation from the matrix S to reverse the translation for the pivot point for R.\n\n To obtain the effective transformation at time t, the elements of the components of S, R, and T will be interpolated\n linearly. The components are then multiplied to obtain the combined transformation C = T * R * S. The transformation\n C is the effective object-to-world transformations at time t, and C^(-1) is the effective world-to-object\n transformation at time t.\n\n \\see #OptixSRTMotionTransform::srtData, #optixConvertPointerToTraversableHandle()"]
+#[doc = " defines another translation that is applied after the rotation. Typically,\n this translation includes the inverse translation from the matrix S to\n reverse the translation for the pivot point for R.\n\n To obtain the effective transformation at time t, the elements of the\n components of S, R, and T will be interpolated linearly. The components are\n then multiplied to obtain the combined transformation C = T * R * S. The\n transformation C is the effective object-to-world transformations at time t,\n and C^(-1) is the effective world-to-object transformation at time t.\n\n \\see #OptixSRTMotionTransform::srtData,\n #optixConvertPointerToTraversableHandle()"]
 #[repr(C)]
 #[derive(Debug, Default, Copy, Clone, PartialOrd, PartialEq)]
 pub struct OptixSRTData {
@@ -2192,7 +2187,7 @@ fn bindgen_test_layout_OptixSRTData() {
         )
     );
 }
-#[doc = " Represents an SRT motion transformation.\n\n The device address of instances of this type must be a multiple of OPTIX_TRANSFORM_BYTE_ALIGNMENT.\n\n This struct, as defined here, handles only N=2 motion keys due to the fixed array length of its srtData member.\n The following example shows how to create instances for an arbitrary number N of motion keys:\n\n \\code\n OptixSRTData srtData[N];\n ... // setup srtData\n\n size_t transformSizeInBytes = sizeof( OptixSRTMotionTransform ) + ( N-2 ) * sizeof( OptixSRTData );\n OptixSRTMotionTransform* srtMotionTransform = (OptixSRTMotionTransform*) malloc( transformSizeInBytes );\n memset( srtMotionTransform, 0, transformSizeInBytes );\n\n ... // setup other members of srtMotionTransform\n srtMotionTransform->motionOptions.numKeys   = N;\n memcpy( srtMotionTransform->srtData, srtData, N * sizeof( OptixSRTData ) );\n\n ... // copy srtMotionTransform to device memory\n free( srtMotionTransform )\n \\endcode\n\n \\see #optixConvertPointerToTraversableHandle()"]
+#[doc = " Represents an SRT motion transformation.\n\n The device address of instances of this type must be a multiple of\n OPTIX_TRANSFORM_BYTE_ALIGNMENT.\n\n This struct, as defined here, handles only N=2 motion keys due to the fixed\n array length of its srtData member. The following example shows how to\n create instances for an arbitrary number N of motion keys:\n\n \\code\n OptixSRTData srtData[N];\n ... // setup srtData\n\n size_t transformSizeInBytes = sizeof( OptixSRTMotionTransform ) + ( N-2 ) *\n sizeof( OptixSRTData ); OptixSRTMotionTransform* srtMotionTransform =\n (OptixSRTMotionTransform*) malloc( transformSizeInBytes ); memset(\n srtMotionTransform, 0, transformSizeInBytes );\n\n ... // setup other members of srtMotionTransform\n srtMotionTransform->motionOptions.numKeys   = N;\n memcpy( srtMotionTransform->srtData, srtData, N * sizeof( OptixSRTData ) );\n\n ... // copy srtMotionTransform to device memory\n free( srtMotionTransform )\n \\endcode\n\n \\see #optixConvertPointerToTraversableHandle()"]
 #[repr(C)]
 #[derive(Debug, Default, Copy, Clone, PartialOrd, PartialEq)]
 pub struct OptixSRTMotionTransform {
@@ -2403,15 +2398,15 @@ pub enum OptixDenoiserModelKind {
     OPTIX_DENOISER_MODEL_KIND_LDR = 8994,
     #[doc = " Use the built-in model appropriate for high dynamic range input."]
     OPTIX_DENOISER_MODEL_KIND_HDR = 8995,
-    #[doc = " Use the built-in model appropriate for high dynamic range input and support for AOVs"]
+    #[doc = " Use the built-in model appropriate for high dynamic range input and\n support for AOVs"]
     OPTIX_DENOISER_MODEL_KIND_AOV = 8996,
-    #[doc = " Use the built-in model appropriate for high dynamic range input, temporally stable"]
+    #[doc = " Use the built-in model appropriate for high dynamic range input,\n temporally stable"]
     OPTIX_DENOISER_MODEL_KIND_TEMPORAL = 8997,
-    #[doc = " Use the built-in model appropriate for high dynamic range input and support for AOVs, temporally stable"]
+    #[doc = " Use the built-in model appropriate for high dynamic range input and\n support for AOVs, temporally stable"]
     OPTIX_DENOISER_MODEL_KIND_TEMPORAL_AOV = 8998,
-    #[doc = " Use the built-in model appropriate for high dynamic range input and support for AOVs, upscaling 2x"]
+    #[doc = " Use the built-in model appropriate for high dynamic range input and\n support for AOVs, upscaling 2x"]
     OPTIX_DENOISER_MODEL_KIND_UPSCALE2X = 8999,
-    #[doc = " Use the built-in model appropriate for high dynamic range input and support for AOVs, upscaling 2x,\n temporally stable"]
+    #[doc = " Use the built-in model appropriate for high dynamic range input and\n support for AOVs, upscaling 2x, temporally stable"]
     OPTIX_DENOISER_MODEL_KIND_TEMPORAL_UPSCALE2X = 9000,
 }
 #[doc = " Options used by the denoiser\n\n \\see #optixDenoiserCreate()"]
@@ -2618,13 +2613,13 @@ pub enum OptixDenoiserAlphaMode {
 pub struct OptixDenoiserParams {
     #[doc = " alpha denoise mode"]
     pub denoiseAlpha: OptixDenoiserAlphaMode,
-    #[doc = " average log intensity of input image (default null pointer). points to a single float.\n with the default (null pointer) denoised results will not be optimal for very dark or\n bright input images."]
+    #[doc = " average log intensity of input image (default null pointer). points to a\n single float. with the default (null pointer) denoised results will not be\n optimal for very dark or bright input images."]
     pub hdrIntensity: CUdeviceptr,
-    #[doc = " blend factor.\n If set to 0 the output is 100% of the denoised input. If set to 1, the output is 100% of\n the unmodified input. Values between 0 and 1 will linearly interpolate between the denoised\n and unmodified input."]
+    #[doc = " blend factor.\n If set to 0 the output is 100% of the denoised input. If set to 1, the\n output is 100% of the unmodified input. Values between 0 and 1 will\n linearly interpolate between the denoised and unmodified input."]
     pub blendFactor: f32,
-    #[doc = " this parameter is used when the OPTIX_DENOISER_MODEL_KIND_AOV model kind is set.\n average log color of input image, separate for RGB channels (default null pointer).\n points to three floats. with the default (null pointer) denoised results will not be\n optimal."]
+    #[doc = " this parameter is used when the OPTIX_DENOISER_MODEL_KIND_AOV model kind\n is set. average log color of input image, separate for RGB channels\n (default null pointer). points to three floats. with the default (null\n pointer) denoised results will not be optimal."]
     pub hdrAverageColor: CUdeviceptr,
-    #[doc = " In temporal modes this parameter must be set to 1 if previous layers (e.g.\n previousOutputInternalGuideLayer) contain valid data. This is the case in the\n second and subsequent frames of a sequence (for example after a change of camera\n angle). In the first frame of such a sequence this parameter must be set to 0."]
+    #[doc = " In temporal modes this parameter must be set to 1 if previous layers (e.g.\n previousOutputInternalGuideLayer) contain valid data. This is the case in\n the second and subsequent frames of a sequence (for example after a change\n of camera angle). In the first frame of such a sequence this parameter\n must be set to 0."]
     pub temporalModeUsePreviousLayers: ::std::os::raw::c_uint,
 }
 #[test]
@@ -2709,9 +2704,9 @@ impl Default for OptixDenoiserParams {
 pub struct OptixDenoiserSizes {
     #[doc = " Size of state memory passed to #optixDenoiserSetup, #optixDenoiserInvoke."]
     pub stateSizeInBytes: usize,
-    #[doc = " Size of scratch memory passed to #optixDenoiserSetup, #optixDenoiserInvoke.\n Overlap added to dimensions passed to #optixDenoiserComputeMemoryResources."]
+    #[doc = " Size of scratch memory passed to #optixDenoiserSetup,\n #optixDenoiserInvoke. Overlap added to dimensions passed to\n #optixDenoiserComputeMemoryResources."]
     pub withOverlapScratchSizeInBytes: usize,
-    #[doc = " Size of scratch memory passed to #optixDenoiserSetup, #optixDenoiserInvoke.\n No overlap added."]
+    #[doc = " Size of scratch memory passed to #optixDenoiserSetup,\n #optixDenoiserInvoke. No overlap added."]
     pub withoutOverlapScratchSizeInBytes: usize,
     #[doc = " Overlap on all four tile sides."]
     pub overlapWindowSizeInPixels: ::std::os::raw::c_uint,
@@ -2816,22 +2811,22 @@ fn bindgen_test_layout_OptixDenoiserSizes() {
     );
 }
 #[repr(u32)]
-#[doc = " Ray flags passed to the device function #optixTrace().  These affect the behavior of\n traversal per invocation.\n\n \\see #optixTrace()"]
+#[doc = " Ray flags passed to the device function #optixTrace().  These affect the\n behavior of traversal per invocation.\n\n \\see #optixTrace()"]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum OptixRayFlags {
     #[doc = " No change from the behavior configured for the individual AS."]
     OPTIX_RAY_FLAG_NONE = 0,
     #[doc = " Disables anyhit programs for the ray.\n Overrides OPTIX_INSTANCE_FLAG_ENFORCE_ANYHIT.\n This flag is mutually exclusive with OPTIX_RAY_FLAG_ENFORCE_ANYHIT,\n OPTIX_RAY_FLAG_CULL_DISABLED_ANYHIT, OPTIX_RAY_FLAG_CULL_ENFORCED_ANYHIT."]
     OPTIX_RAY_FLAG_DISABLE_ANYHIT = 1,
-    #[doc = " Forces anyhit program execution for the ray.\n Overrides OPTIX_GEOMETRY_FLAG_DISABLE_ANYHIT as well as OPTIX_INSTANCE_FLAG_DISABLE_ANYHIT.\n This flag is mutually exclusive with OPTIX_RAY_FLAG_DISABLE_ANYHIT,\n OPTIX_RAY_FLAG_CULL_DISABLED_ANYHIT, OPTIX_RAY_FLAG_CULL_ENFORCED_ANYHIT."]
+    #[doc = " Forces anyhit program execution for the ray.\n Overrides OPTIX_GEOMETRY_FLAG_DISABLE_ANYHIT as well as\n OPTIX_INSTANCE_FLAG_DISABLE_ANYHIT. This flag is mutually exclusive with\n OPTIX_RAY_FLAG_DISABLE_ANYHIT, OPTIX_RAY_FLAG_CULL_DISABLED_ANYHIT,\n OPTIX_RAY_FLAG_CULL_ENFORCED_ANYHIT."]
     OPTIX_RAY_FLAG_ENFORCE_ANYHIT = 2,
     #[doc = " Terminates the ray after the first hit and executes\n the closesthit program of that hit."]
     OPTIX_RAY_FLAG_TERMINATE_ON_FIRST_HIT = 4,
-    #[doc = " Disables closesthit programs for the ray, but still executes miss program in case of a miss."]
+    #[doc = " Disables closesthit programs for the ray, but still executes miss program\n in case of a miss."]
     OPTIX_RAY_FLAG_DISABLE_CLOSESTHIT = 8,
-    #[doc = " Do not intersect triangle back faces\n (respects a possible face change due to instance flag\n OPTIX_INSTANCE_FLAG_FLIP_TRIANGLE_FACING).\n This flag is mutually exclusive with OPTIX_RAY_FLAG_CULL_FRONT_FACING_TRIANGLES."]
+    #[doc = " Do not intersect triangle back faces\n (respects a possible face change due to instance flag\n OPTIX_INSTANCE_FLAG_FLIP_TRIANGLE_FACING).\n This flag is mutually exclusive with\n OPTIX_RAY_FLAG_CULL_FRONT_FACING_TRIANGLES."]
     OPTIX_RAY_FLAG_CULL_BACK_FACING_TRIANGLES = 16,
-    #[doc = " Do not intersect triangle front faces\n (respects a possible face change due to instance flag\n OPTIX_INSTANCE_FLAG_FLIP_TRIANGLE_FACING).\n This flag is mutually exclusive with OPTIX_RAY_FLAG_CULL_BACK_FACING_TRIANGLES."]
+    #[doc = " Do not intersect triangle front faces\n (respects a possible face change due to instance flag\n OPTIX_INSTANCE_FLAG_FLIP_TRIANGLE_FACING).\n This flag is mutually exclusive with\n OPTIX_RAY_FLAG_CULL_BACK_FACING_TRIANGLES."]
     OPTIX_RAY_FLAG_CULL_FRONT_FACING_TRIANGLES = 32,
     #[doc = " Do not intersect geometry which disables anyhit programs\n (due to setting geometry flag OPTIX_GEOMETRY_FLAG_DISABLE_ANYHIT or\n instance flag OPTIX_INSTANCE_FLAG_DISABLE_ANYHIT).\n This flag is mutually exclusive with OPTIX_RAY_FLAG_CULL_ENFORCED_ANYHIT,\n OPTIX_RAY_FLAG_ENFORCE_ANYHIT, OPTIX_RAY_FLAG_DISABLE_ANYHIT."]
     OPTIX_RAY_FLAG_CULL_DISABLED_ANYHIT = 64,
@@ -2839,16 +2834,14 @@ pub enum OptixRayFlags {
     OPTIX_RAY_FLAG_CULL_ENFORCED_ANYHIT = 128,
 }
 #[repr(u32)]
-#[doc = " Transform\n\n OptixTransformType is used by the device function #optixGetTransformTypeFromHandle() to\n determine the type of the OptixTraversableHandle returned from\n optixGetTransformListHandle()."]
+#[doc = " Transform\n\n OptixTransformType is used by the device function\n #optixGetTransformTypeFromHandle() to determine the type of the\n OptixTraversableHandle returned from optixGetTransformListHandle()."]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum OptixTransformType {
     #[doc = "< Not a transformation"]
     OPTIX_TRANSFORM_TYPE_NONE = 0,
     #[doc = "< \\see #OptixStaticTransform"]
     OPTIX_TRANSFORM_TYPE_STATIC_TRANSFORM = 1,
-    #[doc = "< \\see #OptixMatrixMotionTransform"]
     OPTIX_TRANSFORM_TYPE_MATRIX_MOTION_TRANSFORM = 2,
-    #[doc = "< \\see #OptixSRTMotionTransform"]
     OPTIX_TRANSFORM_TYPE_SRT_MOTION_TRANSFORM = 3,
     #[doc = "< \\see #OptixInstance"]
     OPTIX_TRANSFORM_TYPE_INSTANCE = 4,
@@ -2859,9 +2852,9 @@ pub enum OptixTransformType {
 pub enum OptixTraversableGraphFlags {
     #[doc = "  Used to signal that any traversable graphs is valid.\n  This flag is mutually exclusive with all other flags."]
     OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_ANY = 0,
-    #[doc = "  Used to signal that a traversable graph of a single Geometry Acceleration\n  Structure (GAS) without any transforms is valid. This flag may be combined with\n  other flags except for OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_ANY."]
+    #[doc = "  Used to signal that a traversable graph of a single Geometry Acceleration\n  Structure (GAS) without any transforms is valid. This flag may be\n  combined with other flags except for\n  OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_ANY."]
     OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_SINGLE_GAS = 1,
-    #[doc = "  Used to signal that a traversable graph of a single Instance Acceleration\n  Structure (IAS) directly connected to Geometry Acceleration Structure (GAS)\n  traversables without transform traversables in between is valid.  This flag may\n  be combined with other flags except for OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_ANY."]
+    #[doc = "  Used to signal that a traversable graph of a single Instance Acceleration\n  Structure (IAS) directly connected to Geometry Acceleration Structure\n  (GAS) traversables without transform traversables in between is valid.\n  This flag may be combined with other flags except for\n  OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_ANY."]
     OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_SINGLE_LEVEL_INSTANCING = 2,
 }
 #[repr(u32)]
@@ -2900,7 +2893,7 @@ pub enum OptixCompileDebugLevel {
 pub enum OptixModuleCompileState {
     #[doc = " No OptixTask objects have started"]
     OPTIX_MODULE_COMPILE_STATE_NOT_STARTED = 9056,
-    #[doc = " Started, but not all OptixTask objects have completed. No detected failures."]
+    #[doc = " Started, but not all OptixTask objects have completed. No detected\n failures."]
     OPTIX_MODULE_COMPILE_STATE_STARTED = 9057,
     #[doc = " Not all OptixTask objects have completed, but at least one has failed."]
     OPTIX_MODULE_COMPILE_STATE_IMPENDING_FAILURE = 9058,
@@ -2909,7 +2902,7 @@ pub enum OptixModuleCompileState {
     #[doc = " All OptixTask objects have completed. The OptixModule is ready to be used."]
     OPTIX_MODULE_COMPILE_STATE_COMPLETED = 9060,
 }
-#[doc = " Struct for specifying specializations for pipelineParams as specified in\n OptixPipelineCompileOptions::pipelineLaunchParamsVariableName.\n\n The bound values are supposed to represent a constant value in the\n pipelineParams. OptiX will attempt to locate all loads from the pipelineParams and\n correlate them to the appropriate bound value, but there are cases where OptiX cannot\n safely or reliably do this. For example if the pointer to the pipelineParams is passed\n as an argument to a non-inline function or the offset of the load to the\n pipelineParams cannot be statically determined (e.g. accessed in a loop). No module\n should rely on the value being specialized in order to work correctly.  The values in\n the pipelineParams specified on optixLaunch should match the bound value. If\n validation mode is enabled on the context, OptiX will verify that the bound values\n specified matches the values in pipelineParams specified to optixLaunch.\n\n These values are compiled in to the module as constants. Once the constants are\n inserted into the code, an optimization pass will be run that will attempt to\n propagate the consants and remove unreachable code.\n\n If caching is enabled, changes in these values will result in newly compiled modules.\n\n The pipelineParamOffset and sizeInBytes must be within the bounds of the\n pipelineParams variable. OPTIX_ERROR_INVALID_VALUE will be returned from\n optixModuleCreateFromPTX otherwise.\n\n If more than one bound value overlaps or the size of a bound value is equal to 0,\n an OPTIX_ERROR_INVALID_VALUE will be returned from optixModuleCreateFromPTX.\n\n The same set of bound values do not need to be used for all modules in a pipeline, but\n overlapping values between modules must have the same value.\n OPTIX_ERROR_INVALID_VALUE will be returned from optixPipelineCreate otherwise.\n\n \\see #OptixModuleCompileOptions"]
+#[doc = " Struct for specifying specializations for pipelineParams as specified in\n OptixPipelineCompileOptions::pipelineLaunchParamsVariableName.\n\n The bound values are supposed to represent a constant value in the\n pipelineParams. OptiX will attempt to locate all loads from the\n pipelineParams and correlate them to the appropriate bound value, but there\n are cases where OptiX cannot safely or reliably do this. For example if the\n pointer to the pipelineParams is passed as an argument to a non-inline\n function or the offset of the load to the pipelineParams cannot be\n statically determined (e.g. accessed in a loop). No module should rely on\n the value being specialized in order to work correctly.  The values in the\n pipelineParams specified on optixLaunch should match the bound value. If\n validation mode is enabled on the context, OptiX will verify that the bound\n values specified matches the values in pipelineParams specified to\n optixLaunch.\n\n These values are compiled in to the module as constants. Once the constants\n are inserted into the code, an optimization pass will be run that will\n attempt to propagate the consants and remove unreachable code.\n\n If caching is enabled, changes in these values will result in newly compiled\n modules.\n\n The pipelineParamOffset and sizeInBytes must be within the bounds of the\n pipelineParams variable. OPTIX_ERROR_INVALID_VALUE will be returned from\n optixModuleCreateFromPTX otherwise.\n\n If more than one bound value overlaps or the size of a bound value is equal\n to 0, an OPTIX_ERROR_INVALID_VALUE will be returned from\n optixModuleCreateFromPTX.\n\n The same set of bound values do not need to be used for all modules in a\n pipeline, but overlapping values between modules must have the same value.\n OPTIX_ERROR_INVALID_VALUE will be returned from optixPipelineCreate\n otherwise.\n\n \\see #OptixModuleCompileOptions"]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct OptixModuleCompileBoundValueEntry {
@@ -3017,7 +3010,7 @@ impl OptixPayloadSemantics {
         OptixPayloadSemantics::OPTIX_PAYLOAD_SEMANTICS_TRACE_CALLER_NONE;
 }
 #[repr(u32)]
-#[doc = " Semantic flags for a single payload word.\n\n Used to specify the semantics of a payload word per shader type.\n \"read\":  Shader of this type may read the payload word.\n \"write\": Shader of this type may write the payload word.\n\n \"trace_caller_write\": Shaders may consume the value of the payload word passed to optixTrace by the caller.\n \"trace_caller_read\": The caller to optixTrace may read the payload word after the call to optixTrace.\n\n Semantics can be bitwise combined.\n Combining \"read\" and \"write\" is equivalent to specifying \"read_write\".\n A payload needs to be writable by the caller or at least one shader type.\n A payload needs to be readable by the caller or at least one shader type after a being writable."]
+#[doc = " Semantic flags for a single payload word.\n\n Used to specify the semantics of a payload word per shader type.\n \"read\":  Shader of this type may read the payload word.\n \"write\": Shader of this type may write the payload word.\n\n \"trace_caller_write\": Shaders may consume the value of the payload word\n passed to optixTrace by the caller. \"trace_caller_read\": The caller to\n optixTrace may read the payload word after the call to optixTrace.\n\n Semantics can be bitwise combined.\n Combining \"read\" and \"write\" is equivalent to specifying \"read_write\".\n A payload needs to be writable by the caller or at least one shader type.\n A payload needs to be readable by the caller or at least one shader type\n after a being writable."]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub enum OptixPayloadSemantics {
     OPTIX_PAYLOAD_SEMANTICS_TRACE_CALLER_NONE = 0,
@@ -3043,7 +3036,7 @@ pub enum OptixPayloadSemantics {
 pub struct OptixPayloadType {
     #[doc = " The number of 32b words the payload of this type holds"]
     pub numPayloadValues: ::std::os::raw::c_uint,
-    #[doc = " Points to host array of payload word semantics, size must match numPayloadValues"]
+    #[doc = " Points to host array of payload word semantics, size must match\n numPayloadValues"]
     pub payloadSemantics: *const ::std::os::raw::c_uint,
 }
 #[test]
@@ -3106,7 +3099,7 @@ pub struct OptixModuleCompileOptions {
     pub numBoundValues: ::std::os::raw::c_uint,
     #[doc = " The number of different payload types available for compilation.\n Must be zero if OptixPipelineCompileOptions::numPayloadValues is not zero."]
     pub numPayloadTypes: ::std::os::raw::c_uint,
-    #[doc = " Points to host array of payload type definitions, size must match numPayloadTypes"]
+    #[doc = " Points to host array of payload type definitions, size must match\n numPayloadTypes"]
     pub payloadTypes: *mut OptixPayloadType,
 }
 #[test]
@@ -3214,9 +3207,9 @@ pub enum OptixProgramGroupKind {
     OPTIX_PROGRAM_GROUP_KIND_MISS = 9250,
     #[doc = " Program group containing an exception (EX) program\n \\see OptixProgramGroupHitgroup, #OptixProgramGroupDesc::exception"]
     OPTIX_PROGRAM_GROUP_KIND_EXCEPTION = 9251,
-    #[doc = " Program group containing an intersection (IS), any hit (AH), and/or closest hit (CH) program\n \\see #OptixProgramGroupSingleModule, #OptixProgramGroupDesc::hitgroup"]
+    #[doc = " Program group containing an intersection (IS), any hit (AH), and/or\n closest hit (CH) program \\see #OptixProgramGroupSingleModule,\n #OptixProgramGroupDesc::hitgroup"]
     OPTIX_PROGRAM_GROUP_KIND_HITGROUP = 9252,
-    #[doc = " Program group containing a direct (DC) or continuation (CC) callable program\n \\see OptixProgramGroupCallables, #OptixProgramGroupDesc::callables"]
+    #[doc = " Program group containing a direct (DC) or continuation (CC) callable\n program \\see OptixProgramGroupCallables, #OptixProgramGroupDesc::callables"]
     OPTIX_PROGRAM_GROUP_KIND_CALLABLES = 9253,
 }
 #[repr(u32)]
@@ -3226,7 +3219,7 @@ pub enum OptixProgramGroupFlags {
     #[doc = " Currently there are no flags"]
     OPTIX_PROGRAM_GROUP_FLAGS_NONE = 0,
 }
-#[doc = " Program group representing a single module.\n\n Used for raygen, miss, and exception programs. In case of raygen and exception programs, module and entry\n function name need to be valid. For miss programs, module and entry function name might both be \\c nullptr.\n\n \\see #OptixProgramGroupDesc::raygen, #OptixProgramGroupDesc::miss, #OptixProgramGroupDesc::exception"]
+#[doc = " Program group representing a single module.\n\n Used for raygen, miss, and exception programs. In case of raygen and\n exception programs, module and entry function name need to be valid. For\n miss programs, module and entry function name might both be \\c nullptr.\n\n \\see #OptixProgramGroupDesc::raygen, #OptixProgramGroupDesc::miss,\n #OptixProgramGroupDesc::exception"]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct OptixProgramGroupSingleModule {
@@ -3280,7 +3273,7 @@ impl Default for OptixProgramGroupSingleModule {
         }
     }
 }
-#[doc = " Program group representing the hitgroup.\n\n For each of the three program types, module and entry function name might both be \\c nullptr.\n\n \\see #OptixProgramGroupDesc::hitgroup"]
+#[doc = " Program group representing the hitgroup.\n\n For each of the three program types, module and entry function name might\n both be \\c nullptr.\n\n \\see #OptixProgramGroupDesc::hitgroup"]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct OptixProgramGroupHitgroup {
@@ -3382,7 +3375,7 @@ impl Default for OptixProgramGroupHitgroup {
         }
     }
 }
-#[doc = " Program group representing callables.\n\n Module and entry function name need to be valid for at least one of the two callables.\n\n \\see ##OptixProgramGroupDesc::callables"]
+#[doc = " Program group representing callables.\n\n Module and entry function name need to be valid for at least one of the two\n callables.\n\n \\see ##OptixProgramGroupDesc::callables"]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct OptixProgramGroupCallables {
@@ -3611,7 +3604,7 @@ impl Default for OptixProgramGroupDesc {
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct OptixProgramGroupOptions {
-    #[doc = " Specifies the payload type of this program group.\n All programs in the group must support the payload type\n (Program support for a type is specified by calling\n \\see #optixSetPayloadTypes or otherwise all types specified in\n \\see #OptixModuleCompileOptions are supported).\n If a program is not available for the requested payload type,\n optixProgramGroupCreate returns OPTIX_ERROR_PAYLOAD_TYPE_MISMATCH.\n If the payloadType is left zero, a unique type is deduced.\n The payload type can be uniquely deduced if there is exactly one payload type\n for which all programs in the group are available.\n If the payload type could not be deduced uniquely\n optixProgramGroupCreate returns OPTIX_ERROR_PAYLOAD_TYPE_RESOLUTION_FAILED."]
+    #[doc = " Specifies the payload type of this program group.\n All programs in the group must support the payload type\n (Program support for a type is specified by calling\n \\see #optixSetPayloadTypes or otherwise all types specified in\n \\see #OptixModuleCompileOptions are supported).\n If a program is not available for the requested payload type,\n optixProgramGroupCreate returns OPTIX_ERROR_PAYLOAD_TYPE_MISMATCH.\n If the payloadType is left zero, a unique type is deduced.\n The payload type can be uniquely deduced if there is exactly one payload\n type for which all programs in the group are available. If the payload\n type could not be deduced uniquely optixProgramGroupCreate returns\n OPTIX_ERROR_PAYLOAD_TYPE_RESOLUTION_FAILED."]
     pub payloadType: *mut OptixPayloadType,
 }
 #[test]
@@ -3661,15 +3654,15 @@ pub enum OptixExceptionCodes {
     OPTIX_EXCEPTION_CODE_TRAVERSAL_DEPTH_EXCEEDED = -3,
     #[doc = " Traversal encountered an invalid traversable type.\n Exception details:\n     optixGetTransformListSize()\n     optixGetTransformListHandle()\n     optixGetExceptionInvalidTraversable()"]
     OPTIX_EXCEPTION_CODE_TRAVERSAL_INVALID_TRAVERSABLE = -5,
-    #[doc = " The miss SBT record index is out of bounds\n A miss SBT record index is valid within the range [0, OptixShaderBindingTable::missRecordCount) (See optixLaunch)\n Exception details:\n     optixGetExceptionInvalidSbtOffset()"]
+    #[doc = " The miss SBT record index is out of bounds\n A miss SBT record index is valid within the range [0,\n OptixShaderBindingTable::missRecordCount) (See optixLaunch) Exception\n details:\n     optixGetExceptionInvalidSbtOffset()"]
     OPTIX_EXCEPTION_CODE_TRAVERSAL_INVALID_MISS_SBT = -6,
-    #[doc = "     sbt-geometry-acceleration-structure-index (See optixGetSbtGASIndex),\n     sbt-stride-from-trace-call and sbt-offset-from-trace-call (See optixTrace)\n\n sbt-index = sbt-instance-offset + (sbt-geometry-acceleration-structure-index * sbt-stride-from-trace-call) + sbt-offset-from-trace-call\n\n Exception details:\n     optixGetTransformListSize()\n     optixGetTransformListHandle()\n     optixGetExceptionInvalidSbtOffset()\n     optixGetSbtGASIndex()"]
+    #[doc = "     sbt-geometry-acceleration-structure-index (See optixGetSbtGASIndex),\n     sbt-stride-from-trace-call and sbt-offset-from-trace-call (See\n     optixTrace)\n\n sbt-index = sbt-instance-offset +\n (sbt-geometry-acceleration-structure-index * sbt-stride-from-trace-call) +\n sbt-offset-from-trace-call\n\n Exception details:\n     optixGetTransformListSize()\n     optixGetTransformListHandle()\n     optixGetExceptionInvalidSbtOffset()\n     optixGetSbtGASIndex()"]
     OPTIX_EXCEPTION_CODE_TRAVERSAL_INVALID_HIT_SBT = -7,
-    #[doc = " The shader encountered an unsupported primitive type (See OptixPipelineCompileOptions::usesPrimitiveTypeFlags).\n no exception details."]
+    #[doc = " The shader encountered an unsupported primitive type (See\n OptixPipelineCompileOptions::usesPrimitiveTypeFlags). no exception\n details."]
     OPTIX_EXCEPTION_CODE_UNSUPPORTED_PRIMITIVE_TYPE = -8,
-    #[doc = " The shader encountered a call to optixTrace with at least\n one of the float arguments being inf or nan, or the tmin argument is negative.\n Exception details:\n     optixGetExceptionInvalidRay()"]
+    #[doc = " The shader encountered a call to optixTrace with at least\n one of the float arguments being inf or nan, or the tmin argument is\n negative. Exception details:\n     optixGetExceptionInvalidRay()"]
     OPTIX_EXCEPTION_CODE_INVALID_RAY = -9,
-    #[doc = " The shader encountered a call to either optixDirectCall or optixCallableCall\n where the argument count does not match the parameter count of the callable\n program which is called.\n Exception details:\n     optixGetExceptionParameterMismatch"]
+    #[doc = " The shader encountered a call to either optixDirectCall or\n optixCallableCall where the argument count does not match the parameter\n count of the callable program which is called. Exception details:\n     optixGetExceptionParameterMismatch"]
     OPTIX_EXCEPTION_CODE_CALLABLE_PARAMETER_MISMATCH = -10,
     #[doc = " The invoked builtin IS does not match the current GAS"]
     OPTIX_EXCEPTION_CODE_BUILTIN_IS_MISMATCH = -11,
@@ -3677,9 +3670,9 @@ pub enum OptixExceptionCodes {
     OPTIX_EXCEPTION_CODE_CALLABLE_INVALID_SBT = -12,
     #[doc = " Tried to call a direct callable using an SBT offset of a record that\n was built from a program group that did not include a direct callable."]
     OPTIX_EXCEPTION_CODE_CALLABLE_NO_DC_SBT_RECORD = -13,
-    #[doc = " Tried to call a continuation callable using an SBT offset of a record\n that was built from a program group that did not include a continuation callable."]
+    #[doc = " Tried to call a continuation callable using an SBT offset of a record\n that was built from a program group that did not include a continuation\n callable."]
     OPTIX_EXCEPTION_CODE_CALLABLE_NO_CC_SBT_RECORD = -14,
-    #[doc = " Tried to directly traverse a single gas while single gas traversable graphs are not enabled\n   (see OptixTraversableGraphFlags::OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_SINGLE_GAS).\n Exception details:\n     optixGetTransformListSize()\n     optixGetTransformListHandle()\n     optixGetExceptionInvalidTraversable()"]
+    #[doc = " Tried to directly traverse a single gas while single gas traversable\n graphs are not enabled\n   (see\n   OptixTraversableGraphFlags::OPTIX_TRAVERSABLE_GRAPH_FLAG_ALLOW_SINGLE_GAS).\n Exception details:\n     optixGetTransformListSize()\n     optixGetTransformListHandle()\n     optixGetExceptionInvalidTraversable()"]
     OPTIX_EXCEPTION_CODE_UNSUPPORTED_SINGLE_LEVEL_GAS = -15,
     #[doc = " argument passed to an optix call is\n not within an acceptable range of values."]
     OPTIX_EXCEPTION_CODE_INVALID_VALUE_ARGUMENT_0 = -16,
@@ -3687,7 +3680,7 @@ pub enum OptixExceptionCodes {
     OPTIX_EXCEPTION_CODE_INVALID_VALUE_ARGUMENT_1 = -17,
     #[doc = " argument passed to an optix call is\n not within an acceptable range of values."]
     OPTIX_EXCEPTION_CODE_INVALID_VALUE_ARGUMENT_2 = -18,
-    #[doc = " Tried to access data on an AS without random data access support (See OptixBuildFlags)."]
+    #[doc = " Tried to access data on an AS without random data access support (See\n OptixBuildFlags)."]
     OPTIX_EXCEPTION_CODE_UNSUPPORTED_DATA_ACCESS = -32,
     #[doc = " The program payload type doesn't match the trace payload type."]
     OPTIX_EXCEPTION_CODE_PAYLOAD_TYPE_MISMATCH = -33,
@@ -3702,12 +3695,12 @@ pub enum OptixExceptionFlags {
     OPTIX_EXCEPTION_FLAG_STACK_OVERFLOW = 1,
     #[doc = " Enables exceptions check related to trace depth."]
     OPTIX_EXCEPTION_FLAG_TRACE_DEPTH = 2,
-    #[doc = " Enables user exceptions via optixThrowException(). This flag must be specified for all modules in a pipeline\n if any module calls optixThrowException()."]
+    #[doc = " Enables user exceptions via optixThrowException(). This flag must be\n specified for all modules in a pipeline if any module calls\n optixThrowException()."]
     OPTIX_EXCEPTION_FLAG_USER = 4,
     #[doc = " Enables various exceptions check related to traversal."]
     OPTIX_EXCEPTION_FLAG_DEBUG = 8,
 }
-#[doc = " Compilation options for all modules of a pipeline.\n\n Similar to #OptixModuleCompileOptions, but these options here need to be equal for all modules of a pipeline.\n\n \\see #optixModuleCreateFromPTX(), #optixPipelineCreate()"]
+#[doc = " Compilation options for all modules of a pipeline.\n\n Similar to #OptixModuleCompileOptions, but these options here need to be\n equal for all modules of a pipeline.\n\n \\see #optixModuleCreateFromPTX(), #optixPipelineCreate()"]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct OptixPipelineCompileOptions {
@@ -3717,13 +3710,13 @@ pub struct OptixPipelineCompileOptions {
     pub traversableGraphFlags: ::std::os::raw::c_uint,
     #[doc = " How much storage, in 32b words, to make available for the payload, [0..32]\n Must be zero if numPayloadTypes is not zero."]
     pub numPayloadValues: ::std::os::raw::c_int,
-    #[doc = " How much storage, in 32b words, to make available for the attributes. The\n minimum number is 2. Values below that will automatically be changed to 2. [2..8]"]
+    #[doc = " How much storage, in 32b words, to make available for the attributes. The\n minimum number is 2. Values below that will automatically be changed to 2.\n [2..8]"]
     pub numAttributeValues: ::std::os::raw::c_int,
     #[doc = " A bitmask of OptixExceptionFlags indicating which exceptions are enabled."]
     pub exceptionFlags: ::std::os::raw::c_uint,
     #[doc = " The name of the pipeline parameter variable.  If 0, no pipeline parameter\n will be available. This will be ignored if the launch param variable was\n optimized out or was not found in the modules linked to the pipeline."]
     pub pipelineLaunchParamsVariableName: *const ::std::os::raw::c_char,
-    #[doc = " Bit field enabling primitive types. See OptixPrimitiveTypeFlags.\n Setting to zero corresponds to enabling OPTIX_PRIMITIVE_TYPE_FLAGS_CUSTOM and OPTIX_PRIMITIVE_TYPE_FLAGS_TRIANGLE."]
+    #[doc = " Bit field enabling primitive types. See OptixPrimitiveTypeFlags.\n Setting to zero corresponds to enabling OPTIX_PRIMITIVE_TYPE_FLAGS_CUSTOM\n and OPTIX_PRIMITIVE_TYPE_FLAGS_TRIANGLE."]
     pub usesPrimitiveTypeFlags: ::std::os::raw::c_uint,
 }
 #[test]
@@ -3880,19 +3873,19 @@ impl Default for OptixPipelineLinkOptions {
 #[doc = " Describes the shader binding table (SBT)\n\n \\see #optixLaunch()"]
 #[repr(C)]
 pub struct OptixShaderBindingTable {
-    #[doc = " Device address of the SBT record of the ray gen program to start launch at. The address must be a multiple of\n OPTIX_SBT_RECORD_ALIGNMENT."]
+    #[doc = " Device address of the SBT record of the ray gen program to start launch\n at. The address must be a multiple of OPTIX_SBT_RECORD_ALIGNMENT."]
     pub raygenRecord: CUdeviceptr,
-    #[doc = " Device address of the SBT record of the exception program. The address must be a multiple of\n OPTIX_SBT_RECORD_ALIGNMENT."]
+    #[doc = " Device address of the SBT record of the exception program. The address\n must be a multiple of OPTIX_SBT_RECORD_ALIGNMENT."]
     pub exceptionRecord: CUdeviceptr,
-    #[doc = " Arrays of SBT records for miss programs. The base address and the stride must be a multiple of\n OPTIX_SBT_RECORD_ALIGNMENT.\n @{"]
+    #[doc = " Arrays of SBT records for miss programs. The base address and the stride\n must be a multiple of OPTIX_SBT_RECORD_ALIGNMENT.\n @{"]
     pub missRecordBase: CUdeviceptr,
     pub missRecordStrideInBytes: ::std::os::raw::c_uint,
     pub missRecordCount: ::std::os::raw::c_uint,
-    #[doc = " Arrays of SBT records for hit groups. The base address and the stride must be a multiple of\n OPTIX_SBT_RECORD_ALIGNMENT.\n @{"]
+    #[doc = " Arrays of SBT records for hit groups. The base address and the stride must\n be a multiple of OPTIX_SBT_RECORD_ALIGNMENT.\n @{"]
     pub hitgroupRecordBase: CUdeviceptr,
     pub hitgroupRecordStrideInBytes: ::std::os::raw::c_uint,
     pub hitgroupRecordCount: ::std::os::raw::c_uint,
-    #[doc = " Arrays of SBT records for callable programs. If the base address is not null, the stride and count must not be\n zero. If the base address is null, then the count needs to zero. The base address and the stride must be a\n multiple of OPTIX_SBT_RECORD_ALIGNMENT.\n @{"]
+    #[doc = " Arrays of SBT records for callable programs. If the base address is not\n null, the stride and count must not be zero. If the base address is null,\n then the count needs to zero. The base address and the stride must be a\n multiple of OPTIX_SBT_RECORD_ALIGNMENT.\n @{"]
     pub callablesRecordBase: CUdeviceptr,
     pub callablesRecordStrideInBytes: ::std::os::raw::c_uint,
     pub callablesRecordCount: ::std::os::raw::c_uint,
@@ -4156,16 +4149,16 @@ pub type OptixQueryFunctionTable_t = ::std::option::Option<
         sizeOfTable: usize,
     ) -> OptixResult,
 >;
-#[doc = " Specifies the options for retrieving an intersection program for a built-in primitive type.\n The primitive type must not be OPTIX_PRIMITIVE_TYPE_CUSTOM.\n\n \\see #optixBuiltinISModuleGet()"]
+#[doc = " Specifies the options for retrieving an intersection program for a built-in\n primitive type. The primitive type must not be OPTIX_PRIMITIVE_TYPE_CUSTOM.\n\n \\see #optixBuiltinISModuleGet()"]
 #[repr(C)]
 #[derive(Debug, Copy, Clone, Hash, PartialOrd, Ord, PartialEq, Eq)]
 pub struct OptixBuiltinISOptions {
     pub builtinISModuleType: OptixPrimitiveType,
-    #[doc = " Boolean value indicating whether vertex motion blur is used (but not motion transform blur)."]
+    #[doc = " Boolean value indicating whether vertex motion blur is used (but not\n motion transform blur)."]
     pub usesMotionBlur: ::std::os::raw::c_int,
     #[doc = " Build flags, see OptixBuildFlags."]
     pub buildFlags: ::std::os::raw::c_uint,
-    #[doc = " End cap properties of curves, see OptixCurveEndcapFlags, 0 for non-curve types."]
+    #[doc = " End cap properties of curves, see OptixCurveEndcapFlags, 0 for non-curve\n types."]
     pub curveEndcapFlags: ::std::os::raw::c_uint,
 }
 #[test]

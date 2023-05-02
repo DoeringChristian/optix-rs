@@ -6,7 +6,7 @@ use cuda_rs::*;
 use crate::OptixError;
 include!("autogen_optix.rs");
 
-const OPTIX_ABI_VERSION: i32 = 55;
+const OPTIX_SBT_RECORD_HEADER_SIZE: usize = 32;
 
 pub struct OptixApi {
     lib: libloading::Library,
@@ -24,7 +24,7 @@ impl OptixApi {
                 lib.get(b"optixQueryFunctionTable").unwrap();
             let mut ftable = OptixFunctionTable::default();
             query_table.unwrap()(
-                OPTIX_ABI_VERSION,
+                OPTIX_ABI_VERSION as _,
                 0,
                 std::ptr::null_mut(),
                 std::ptr::null_mut(),
