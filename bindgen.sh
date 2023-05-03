@@ -18,12 +18,15 @@ bindgen \
   --allowlist-var="OptixBuildInputSize" \
   --allowlist-var="OptixShaderBindingTableSize" \
   --allowlist-var="OPTIX_.*" \
+  --allowlist-var="^Optix.*" \
+  --allowlist-type="^Optix.*" \
   --blocklist-type="^CU.*" \
   --default-enum-style=rust \
   --with-derive-default \
   --with-derive-eq \
   --with-derive-hash \
   --with-derive-ord \
+  --with-derive-custom-struct="OptixBuildInputTriangleArray=Debug" \
   --vtable-generation \
   wrapper.h -- -I$OPTIX_ROOT_DIR/include -I/opt/cuda/include\
   > src/autogen_optix.rs

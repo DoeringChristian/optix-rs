@@ -319,6 +319,7 @@ pub enum OptixTransformFormat {
 }
 #[doc = " Triangle inputs\n\n \\see #OptixBuildInput::triangleArray"]
 #[repr(C)]
+#[derive(Debug)]
 pub struct OptixBuildInputTriangleArray {
     #[doc = " Points to host array of device pointers, one per motion step. Host array\n size must match the number of motion keys as set in #OptixMotionOptions\n (or an array of size 1 if OptixMotionOptions::numKeys is set to 0 or 1).\n Each per motion key device pointer must point to an array of vertices of\n the triangles in the format as described by vertexFormat. The minimum\n alignment must match the natural alignment of the type as specified in the\n vertexFormat, i.e., for OPTIX_VERTEX_FORMAT_FLOATX 4-byte, for all others\n a 2-byte alignment. However, an 16-byte stride (and buffer alignment) is\n recommended for vertices of format OPTIX_VERTEX_FORMAT_FLOAT3 for GAS\n build performance."]
     pub vertexBuffers: *const CUdeviceptr,
