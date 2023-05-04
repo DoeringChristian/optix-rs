@@ -27,6 +27,7 @@ bindgen \
   --with-derive-hash \
   --with-derive-ord \
   --with-derive-custom-struct="OptixBuildInputTriangleArray=Debug" \
+  --with-derive-custom-struct="OptixShaderBindingTable=Debug" \
   --vtable-generation \
   wrapper.h -- -I$OPTIX_ROOT_DIR/include -I/opt/cuda/include\
   > src/autogen_optix.rs

@@ -3873,6 +3873,7 @@ impl Default for OptixPipelineLinkOptions {
 }
 #[doc = " Describes the shader binding table (SBT)\n\n \\see #optixLaunch()"]
 #[repr(C)]
+#[derive(Debug)]
 pub struct OptixShaderBindingTable {
     #[doc = " Device address of the SBT record of the ray gen program to start launch\n at. The address must be a multiple of OPTIX_SBT_RECORD_ALIGNMENT."]
     pub raygenRecord: CUdeviceptr,
